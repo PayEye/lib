@@ -1,0 +1,29 @@
+stages:
+  - deploy
+
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+
+default:
+  tags: [ docker-front-1 ]
+
+variables:
+  REGION: eu-central-1
+  DOCKER_TLS_CERTDIR: ''
+  DOCKER_DRIVER: overlay2
+  REPO_URL_PREFIX: 306124787333.dkr.ecr.${REGION}.amazonaws.com/payeye
+  BUILDER_IMAGE_REPO: ubuntu
+  BUILDER_IMAGE_TAG: "20.04"
+  BUILDER_IMAGE: "${REPO_URL_PREFIX}/${BUILDER_IMAGE_REPO}:${BUILDER_IMAGE_TAG}"
+
+
+deploy:
+  stage: deploy
+  image: ${BUILDER_IMAGE}
+  script:
+    - apt update
+    - apt install -y curl
+    - 'curl --header "Job-Token: $CI_JOB_TOKEN" --data tag=0.0.1 "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages/composer"'
+  environment: production
