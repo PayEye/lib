@@ -1,10 +1,16 @@
 {
   "name": "payeye/lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "library",
   "autoload": {
     "psr-4": {
       "PayEye\\Lib\\": "src/"
     }
+  },
+  "archive": {
+    "exclude": [
+      ".gitlab-ci.yml",
+      "README.md"
+    ]
   }
 }
