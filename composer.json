@@ -1,6 +1,8 @@
 {
   "name": "payeye/lib",
   "version": "1.0.0",
+  "description": "this is a test 2",
+  "type": "library",
   "autoload": {
     "psr-4": {
       "PayEye\\Lib\\": "src/"
