@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PayEye\Lib\ResponseModel;
+namespace PayEye\Lib\Order;
 
 use PayEye\Lib\Tool\Builder;
 

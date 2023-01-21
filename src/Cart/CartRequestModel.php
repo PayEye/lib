@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PayEye\Lib\RequestModel;
+namespace PayEye\Lib\Cart;
 
 use PayEye\Lib\Model\Shipment;
 
