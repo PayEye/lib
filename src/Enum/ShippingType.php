@@ -8,4 +8,14 @@ abstract class ShippingType
     public const ZABKA = 'ZABKA';
     public const COURIER = 'COURIER';
     public const SELF_PICKUP = 'SELF_PICKUP';
+
+    public static function getAll(): array
+    {
+        return [
+            self::INPOST,
+            self::ZABKA,
+            self::COURIER,
+            self::SELF_PICKUP,
+        ];
+    }
 }
