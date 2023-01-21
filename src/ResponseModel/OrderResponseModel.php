@@ -13,7 +13,7 @@ class OrderResponseModel
     /** @var string */
     public $checkoutUrl;
 
-    /** @var int */
+    /** @var string */
     public $orderId;
 
     /** @var int|float */
@@ -49,7 +49,7 @@ class OrderResponseModel
         return $this;
     }
 
-    public function setOrderId(int $orderId): self
+    public function setOrderId(string $orderId): self
     {
         $this->orderId = $orderId;
         return $this;
