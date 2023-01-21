@@ -8,6 +8,7 @@ use PayEye\Lib\Enum\HttpStatus;
 use PayEye\Lib\HttpClient\Exception\HttpException;
 use PayEye\Lib\HttpClient\Exception\HttpNetworkException;
 use PayEye\Lib\HttpClient\Model\HttpResponse;
+use PayEye\Lib\Tool\JsonHelper;
 
 class HttpClient
 {
@@ -50,7 +51,7 @@ class HttpClient
         ];
 
         if ($data) {
-            $options[CURLOPT_POSTFIELDS] = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $options[CURLOPT_POSTFIELDS] = JsonHelper::jsonEncode($data);
         }
 
         curl_setopt_array($curl, $options);

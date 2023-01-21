@@ -6,5 +6,8 @@
     "psr-4": {
       "PayEye\\Lib\\": "src/"
     }
+  },
+  "require": {
+    "ext-curl": "*"
   }
 }
