@@ -1,10 +1,13 @@
 {
   "name": "payeye/lib",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "type": "library",
   "autoload": {
     "psr-4": {
       "PayEye\\Lib\\": "src/"
     }
+  },
+  "require": {
+    "ext-curl": "*"
   }
 }
