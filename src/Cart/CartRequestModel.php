@@ -11,9 +11,6 @@ class CartRequestModel
     /** @var string */
     private $cartId;
 
-    /** @var null|array */
-    private $coupons;
-
     /** @var null|string */
     private $deliveryType;
 
@@ -26,7 +23,6 @@ class CartRequestModel
     public function __construct(array $request)
     {
         $this->cartId = $request['cartId'];
-        $this->coupons = $request['coupons'] ?? null;
         $this->shippingId = $request['shippingId'] ?? null;
         $this->deliveryType = $request['deliveryType'] ?? null;
 
@@ -44,11 +40,6 @@ class CartRequestModel
     public function getDeliveryType(): ?string
     {
         return $this->deliveryType;
-    }
-
-    public function getCoupons(): ?array
-    {
-        return $this->coupons;
     }
 
     public function getShippingId(): ?string
