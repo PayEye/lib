@@ -52,9 +52,13 @@ class CartResponseModel
             return Product::createFromArray($product);
         }, $context['products']);
 
+        $coupons = array_map(static function (array $product) {
+            return Coupon::createFromArray($product);
+        }, $context['coupons']);
+
         return self::builder()
             ->setShop(Shop::createFromArray($context['shop']))
-            ->setCoupons($context['coupons'])
+            ->setCoupons($coupons)
             ->setShippingId($context['shippingId'])
             ->setShipping($shipping)
             ->setCart(Cart::createFromArray($context['cart']))

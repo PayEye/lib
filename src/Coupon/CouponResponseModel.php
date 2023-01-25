@@ -27,7 +27,6 @@ class CouponResponseModel
 
     /**
      * @param string $status
-     * @return CouponResponseModel
      */
     public function setStatus(string $status): self
     {
