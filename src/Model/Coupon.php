@@ -4,35 +4,54 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Model;
 
-
 use PayEye\Lib\Tool\Builder;
 
 class Coupon
 {
     use Builder;
 
-    /** @var string */
+    /** @var string|null */
     public $code;
 
+    /** @var string */
+    public $type;
+
     /** @var int */
-    public $price;
+    public $value;
+
+    /** @var bool */
+    public $freeDelivery;
 
     public static function createFromArray(array $context): self
     {
         return self::builder()
             ->setCode($context['code'])
-            ->setPrice($context['price']);
+            ->setType($context['type'])
+            ->setValue($context['value'])
+            ->setFreeDelivery($context['freeDelivery']);
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
         return $this;
     }
 
-    public function setPrice(int $price): self
+    public function setType(string $type): self
     {
-        $this->price = $price;
+        $this->type = $type;
+        return $this;
+    }
+
+    public function setValue(int $value): self
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    public function setFreeDelivery(bool $freeDelivery): self
+    {
+        $this->freeDelivery = $freeDelivery;
         return $this;
     }
 }
