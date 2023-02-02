@@ -14,12 +14,12 @@ class CouponRequestModel
     private $cartId;
 
     /** @var string */
-    private $coupon;
+    private $promoCode;
 
     public function __construct(array $request)
     {
         $this->cartId = $request['cartId'];
-        $this->coupon = $request['coupon'];
+        $this->promoCode = $request['promoCode'];
     }
 
     public function getCartId(): string
@@ -27,8 +27,8 @@ class CouponRequestModel
         return $this->cartId;
     }
 
-    public function getCoupon(): string
+    public function getPromoCode(): string
     {
-        return $this->coupon;
+        return $this->promoCode;
     }
 }
