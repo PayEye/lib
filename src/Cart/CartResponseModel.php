@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PayEye\Lib\Cart;
 
 use PayEye\Lib\Model\Cart;
-use PayEye\Lib\Model\Coupon;
 use PayEye\Lib\Model\Product;
+use PayEye\Lib\Model\PromoCode;
 use PayEye\Lib\Model\Shipping;
 use PayEye\Lib\Model\Shop;
 use PayEye\Lib\Tool\Builder;
@@ -18,8 +18,8 @@ class CartResponseModel
     /** @var Shop */
     public $shop;
 
-    /** @var Coupon[] */
-    public $coupons;
+    /** @var PromoCode[] */
+    public $promoCodes;
 
     /** @var string|null */
     public $shippingId;
@@ -52,13 +52,13 @@ class CartResponseModel
             return Product::createFromArray($product);
         }, $context['products']);
 
-        $coupons = array_map(static function (array $product) {
-            return Coupon::createFromArray($product);
-        }, $context['coupons']);
+        $promoCodes = array_map(static function (array $product) {
+            return PromoCode::createFromArray($product);
+        }, $context['promoCodes']);
 
         return self::builder()
             ->setShop(Shop::createFromArray($context['shop']))
-            ->setCoupons($coupons)
+            ->setPromoCodes($promoCodes)
             ->setShippingId($context['shippingId'])
             ->setShipping($shipping)
             ->setCart(Cart::createFromArray($context['cart']))
@@ -75,11 +75,11 @@ class CartResponseModel
     }
 
     /**
-     * @param Coupon[] $coupons
+     * @param PromoCode[] $promoCodes
      */
-    public function setCoupons(array $coupons): self
+    public function setPromoCodes(array $promoCodes): self
     {
-        $this->coupons = $coupons;
+        $this->promoCodes = $promoCodes;
         return $this;
     }
 

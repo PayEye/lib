@@ -6,7 +6,7 @@ namespace PayEye\Lib\Model;
 
 use PayEye\Lib\Tool\Builder;
 
-class Coupon
+class PromoCode
 {
     use Builder;
 
