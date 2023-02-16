@@ -7,6 +7,7 @@ namespace PayEye\Lib\Auth;
 use PayEye\Lib\Model\Cart;
 use PayEye\Lib\Model\Coupon;
 use PayEye\Lib\Model\Product;
+use PayEye\Lib\Model\PromoCode;
 use PayEye\Lib\Model\Shipping;
 use PayEye\Lib\Tool\JsonHelper;
 
@@ -26,7 +27,7 @@ class HashService
     }
 
     /**
-     * @param Coupon[] $coupons
+     * @param PromoCode[] $promoCodes
      * @param Shipping[] $shipping
      * @param Cart $cart
      * @param Product[] $products
@@ -35,13 +36,13 @@ class HashService
      * @return string
      */
     public function cartHash(
-        array $coupons,
+        array $promoCodes,
         array $shipping,
         Cart $cart,
         ?string $shippingId,
         string $currency,
         array $products
     ): string {
-        return $this->hash(JsonHelper::jsonEncode([$coupons, $shippingId, $shipping, $cart, $currency, $products]));
+        return $this->hash(JsonHelper::jsonEncode([$promoCodes, $shippingId, $shipping, $cart, $currency, $products]));
     }
 }
