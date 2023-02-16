@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PayEye\Lib\Auth;
 
 use PayEye\Lib\Model\Cart;
-use PayEye\Lib\Model\Coupon;
 use PayEye\Lib\Model\Product;
 use PayEye\Lib\Model\PromoCode;
 use PayEye\Lib\Model\Shipping;
@@ -23,7 +22,7 @@ class HashService
 
     public function hash(string $json): string
     {
-        return hash('sha256', $this->authConfig->getSecretKey() . $this->authConfig->getPublicKey() . $json);
+        return hash('sha256', $this->authConfig->getSecretKey().$this->authConfig->getPublicKey().$json);
     }
 
     /**
