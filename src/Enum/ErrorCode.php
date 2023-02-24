@@ -6,6 +6,7 @@ namespace PayEye\Lib\Enum;
 
 abstract class ErrorCode
 {
+    public const SIGNATURE_NOT_MATCHED = 'SIGNATURE_NOT_MATCHED';
     public const CART_CONTENT_NOT_MATCHED = 'CART_CONTENT_NOT_MATCHED';
     public const CART_NOT_FOUND = 'CART_NOT_FOUND';
     public const CART_EMPTY = 'CART_EMPTY';
