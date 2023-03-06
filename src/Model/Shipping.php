@@ -19,6 +19,9 @@ class Shipping
     /** @var int */
     public $cost;
 
+    /** @var int */
+    public $regularCost;
+
     /** @var string */
     public $type;
 
@@ -28,6 +31,7 @@ class Shipping
             ->setId($context['id'])
             ->setLabel($context['label'])
             ->setCost($context['cost'])
+            ->setRegularCost($context['regularCost'])
             ->setType($context['type']);
     }
 
@@ -46,6 +50,12 @@ class Shipping
     public function setCost(int $cost): self
     {
         $this->cost = $cost;
+        return $this;
+    }
+
+    public function setRegularCost(int $regularCost): self
+    {
+        $this->regularCost = $regularCost;
         return $this;
     }
 
