@@ -9,7 +9,7 @@ class Address
     /** @var null|string */
     private $street;
 
-    /** @var string */
+    /** @var null|string */
     private $homeNumber;
 
     /** @var null|string */
@@ -25,6 +25,9 @@ class Address
     private $country;
 
     /** @var string */
+    private $firstLine;
+
+    /** @var string */
     private $fullAddress;
 
     public function __construct(array $context)
@@ -36,7 +39,19 @@ class Address
         $this->city = $context['city'];
         $this->country = $context['country'];
 
-        $this->fullAddress = $this->getStreet() . ' ' . $this->getHomeNumber() . '/' . $this->getFlatNumber();
+        $this->firstLine = $this->street ?? $this->city;
+
+        if ($this->homeNumber) {
+            $this->firstLine .= ' '.$this->homeNumber;
+
+            if ($this->flatNumber) {
+                $this->firstLine .= '/'.$this->flatNumber;
+            }
+        } elseif ($this->flatNumber) {
+            $this->firstLine .= ' '.$this->flatNumber;
+        }
+
+        $this->fullAddress = $this->firstLine.', '.$this->postCode.' '.$this->city.', '.$this->country;
     }
 
     public function getStreet(): ?string
@@ -44,7 +59,7 @@ class Address
         return $this->street;
     }
 
-    public function getHomeNumber(): string
+    public function getHomeNumber(): ?string
     {
         return $this->homeNumber;
     }
@@ -67,6 +82,11 @@ class Address
     public function getCountry(): string
     {
         return $this->country;
+    }
+
+    public function getFirstLine(): string
+    {
+        return $this->firstLine;
     }
 
     public function getFullAddress(): string
