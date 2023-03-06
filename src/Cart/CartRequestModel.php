@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Cart;
 
-use PayEye\Lib\Model\Shipment;
+use PayEye\Lib\Model\Address;
 
 class CartRequestModel
 {
@@ -17,7 +17,7 @@ class CartRequestModel
     /** @var null|string */
     private $shippingId;
 
-    /** @var null|Shipment */
+    /** @var null|Address */
     private $shipment;
 
     public function __construct(array $request)
@@ -28,7 +28,7 @@ class CartRequestModel
 
         $shipment = $request['shipment'] ?? null;
         if ($shipment) {
-            $this->shipment = Shipment::createFromArray($shipment);
+            $this->shipment = new Address($shipment);
         }
     }
 
@@ -47,7 +47,7 @@ class CartRequestModel
         return $this->shippingId;
     }
 
-    public function getShipment(): ?Shipment
+    public function getShipment(): ?Address
     {
         return $this->shipment;
     }
