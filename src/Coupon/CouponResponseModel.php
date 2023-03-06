@@ -25,9 +25,6 @@ class CouponResponseModel
         return $this;
     }
 
-    /**
-     * @param string $status
-     */
     public function setStatus(string $status): self
     {
         $this->status = $status;
