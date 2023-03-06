@@ -22,13 +22,17 @@ class PromoCode
     /** @var bool */
     public $freeDelivery;
 
+    /** @var bool */
+    public $payeyeCode;
+
     public static function createFromArray(array $context): self
     {
         return self::builder()
             ->setCode($context['code'])
             ->setType($context['type'])
             ->setValue($context['value'])
-            ->setFreeDelivery($context['freeDelivery']);
+            ->setFreeDelivery($context['freeDelivery'])
+            ->setPayeyeCode($context['payeyeCode']);
     }
 
     public function setCode(?string $code): self
@@ -52,6 +56,12 @@ class PromoCode
     public function setFreeDelivery(bool $freeDelivery): self
     {
         $this->freeDelivery = $freeDelivery;
+        return $this;
+    }
+
+    public function setPayeyeCode(bool $payeyeCode): self
+    {
+        $this->payeyeCode = $payeyeCode;
         return $this;
     }
 }
