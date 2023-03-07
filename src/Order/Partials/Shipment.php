@@ -17,11 +17,15 @@ class Shipment
     /** @var Address */
     private $address;
 
+    /** @var PickupPoint */
+    private $pickupPoint;
+
     public function __construct(array $context)
     {
         $this->firstname = $context['firstname'];
         $this->lastname = $context['lastname'];
         $this->address = new Address($context);
+        $this->pickupPoint = new PickupPoint($context['pickupPoint']);
     }
 
     public function getFirstname(): string
@@ -37,5 +41,10 @@ class Shipment
     public function getAddress(): Address
     {
         return $this->address;
+    }
+
+    public function getPickupPoint(): PickupPoint
+    {
+        return $this->pickupPoint;
     }
 }
