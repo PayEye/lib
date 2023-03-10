@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PayEye\Lib\Order;
 
 use PayEye\Lib\Model\Invoice;
-use PayEye\Lib\Model\PersonalData;
-use PayEye\Lib\Order\Partials\Shipment;
+use PayEye\Lib\Model\Billing;
+use PayEye\Lib\Model\Shipping;
 
 class OrderRequestModel
 {
@@ -16,17 +16,14 @@ class OrderRequestModel
     /** @var string */
     private $shippingId;
 
-    /** @var null|string */
-    private $deliveryData;
-
-    /** @var PersonalData */
-    private $personalData;
+    /** @var Billing */
+    private $billing;
 
     /** @var bool */
     private $hasInvoice;
 
-    /** @var Shipment */
-    private $shipment;
+    /** @var Shipping */
+    private $shipping;
 
     /** @var null|Invoice */
     private $invoice;
@@ -41,8 +38,8 @@ class OrderRequestModel
     {
         $this->cartId = $request['cartId'];
         $this->shippingId = $request['shippingId'];
-        $this->personalData = new PersonalData($request['personalData']);
-        $this->shipment = new Shipment($request['shipment']);
+        $this->billing = new Billing($request['billing']);
+        $this->shipping = new Shipping($request['shipping']);
         $this->hasInvoice = $request['hasInvoice'];
         $this->cartHash = $request['cartHash'];
         $this->shippingProvider = $request['shippingProvider'];
@@ -51,7 +48,6 @@ class OrderRequestModel
         if ($this->hasInvoice) {
             $this->invoice = new Invoice($invoice);
         }
-        $this->deliveryData = $request['deliveryData'];
     }
 
     public function getCartId(): string
@@ -64,14 +60,14 @@ class OrderRequestModel
         return $this->shippingId;
     }
 
-    public function getPersonalData(): PersonalData
+    public function getBilling(): Billing
     {
-        return $this->personalData;
+        return $this->billing;
     }
 
-    public function getShipment(): Shipment
+    public function getShipping(): Shipping
     {
-        return $this->shipment;
+        return $this->shipping;
     }
 
     public function isHasInvoice(): bool
@@ -82,11 +78,6 @@ class OrderRequestModel
     public function getInvoice(): ?Invoice
     {
         return $this->invoice;
-    }
-
-    public function getDeliveryData(): ?string
-    {
-        return $this->deliveryData;
     }
 
     public function getCartHash(): string

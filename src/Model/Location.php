@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PayEye\Lib\Order\Partials;
-
-use PayEye\Lib\Model\Address;
+namespace PayEye\Lib\Model;
 
 class Location
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PayEye\Lib\Order\Partials;
+namespace PayEye\Lib\Model;
 
 class PickupPoint
 {

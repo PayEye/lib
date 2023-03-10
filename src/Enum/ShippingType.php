@@ -5,7 +5,7 @@ namespace PayEye\Lib\Enum;
 abstract class ShippingType
 {
     public const INPOST = 'INPOST';
-    public const ZABKA = 'ZABKA';
+    public const DHL = 'DHL';
     public const COURIER = 'COURIER';
     public const SELF_PICKUP = 'SELF_PICKUP';
 
@@ -13,7 +13,7 @@ abstract class ShippingType
     {
         return [
             self::INPOST,
-            self::ZABKA,
+            self::DHL,
             self::COURIER,
             self::SELF_PICKUP,
         ];

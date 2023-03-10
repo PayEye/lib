@@ -4,64 +4,49 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Model;
 
-use PayEye\Lib\Tool\Builder;
-
 class Shipping
 {
-    use Builder;
+    /** @var string */
+    private $firstName;
 
     /** @var string */
-    public $id;
+    private $lastName;
 
-    /** @var string */
-    public $label;
+    /** @var Address */
+    private $address;
 
-    /** @var int */
-    public $cost;
+    /** @var null|PickupPoint */
+    private $pickupPoint;
 
-    /** @var int */
-    public $regularCost;
-
-    /** @var string */
-    public $type;
-
-    public static function createFromArray(array $context): self
+    public function __construct(array $context)
     {
-        return self::builder()
-            ->setId($context['id'])
-            ->setLabel($context['label'])
-            ->setCost($context['cost'])
-            ->setRegularCost($context['regularCost'])
-            ->setType($context['type']);
+        $this->firstName = $context['firstName'];
+        $this->lastName = $context['lastName'];
+        $this->address = new Address($context['address']);
+
+        $pickupPoint = $context['pickupPoint'] ?? null;
+        if ($pickupPoint) {
+            $this->pickupPoint = new PickupPoint($context['pickupPoint']);
+        }
     }
 
-    public function setId(string $id): self
+    public function getFirstName(): string
     {
-        $this->id = $id;
-        return $this;
+        return $this->firstName;
     }
 
-    public function setLabel(string $label): self
+    public function getLastName(): string
     {
-        $this->label = $label;
-        return $this;
+        return $this->lastName;
     }
 
-    public function setCost(int $cost): self
+    public function getAddress(): Address
     {
-        $this->cost = $cost;
-        return $this;
+        return $this->address;
     }
 
-    public function setRegularCost(int $regularCost): self
+    public function getPickupPoint(): ?PickupPoint
     {
-        $this->regularCost = $regularCost;
-        return $this;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-        return $this;
+        return $this->pickupPoint;
     }
 }
