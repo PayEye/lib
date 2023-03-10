@@ -7,7 +7,7 @@ namespace PayEye\Lib\Cart;
 use PayEye\Lib\Model\Cart;
 use PayEye\Lib\Model\Product;
 use PayEye\Lib\Model\PromoCode;
-use PayEye\Lib\Model\Shipping;
+use PayEye\Lib\Model\ShippingMethod;
 use PayEye\Lib\Model\Shop;
 use PayEye\Lib\Tool\Builder;
 
@@ -24,8 +24,8 @@ class CartResponseModel
     /** @var string|null */
     public $shippingId;
 
-    /** @var Shipping[] */
-    public $shipping;
+    /** @var ShippingMethod[] */
+    public $shippingMethods;
 
     /** @var Cart */
     public $cart;
@@ -44,9 +44,9 @@ class CartResponseModel
 
     public static function createFromArray(array $context): self
     {
-        $shipping = array_map(static function (array $shipping) {
-            return Shipping::createFromArray($shipping);
-        }, $context['shipping']);
+        $shippingMethods = array_map(static function (array $shipping) {
+            return ShippingMethod::createFromArray($shipping);
+        }, $context['shippingMethods']);
 
         $products = array_map(static function (array $product) {
             return Product::createFromArray($product);
@@ -60,7 +60,7 @@ class CartResponseModel
             ->setShop(Shop::createFromArray($context['shop']))
             ->setPromoCodes($promoCodes)
             ->setShippingId($context['shippingId'])
-            ->setShipping($shipping)
+            ->setShippingMethods($shippingMethods)
             ->setCart(Cart::createFromArray($context['cart']))
             ->setCurrency($context['currency'])
             ->setProducts($products)
@@ -71,6 +71,7 @@ class CartResponseModel
     public function setShop(Shop $shop): self
     {
         $this->shop = $shop;
+
         return $this;
     }
 
@@ -80,33 +81,38 @@ class CartResponseModel
     public function setPromoCodes(array $promoCodes): self
     {
         $this->promoCodes = $promoCodes;
+
         return $this;
     }
 
     public function setShippingId(?string $shippingId): self
     {
         $this->shippingId = $shippingId;
+
         return $this;
     }
 
     /**
-     * @param Shipping[] $shipping
+     * @param ShippingMethod[] $shippingMethods
      */
-    public function setShipping(array $shipping): self
+    public function setShippingMethods(array $shippingMethods): self
     {
-        $this->shipping = $shipping;
+        $this->shippingMethods = $shippingMethods;
+
         return $this;
     }
 
     public function setCart(Cart $cart): self
     {
         $this->cart = $cart;
+
         return $this;
     }
 
     public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
+
         return $this;
     }
 
@@ -116,12 +122,14 @@ class CartResponseModel
     public function setProducts(array $products): self
     {
         $this->products = $products;
+
         return $this;
     }
 
     public function setCartHash(string $cartHash): self
     {
         $this->cartHash = $cartHash;
+
         return $this;
     }
 
@@ -131,6 +139,7 @@ class CartResponseModel
     public function setSignatureFrom(array $signatureFrom): self
     {
         $this->signatureFrom = $signatureFrom;
+
         return $this;
     }
 }

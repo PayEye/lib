@@ -24,4 +24,7 @@ abstract class ErrorCode
 
     public const WOOCOMMERCE = 'WOOCOMMERCE';
     public const PRESTASHOP = 'PRESTASHOP';
+    public const Magento2 = 'MAGENTO2';
+
+    public const UNKNOWN = 'UNKNOWN';
 }

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Model;
 
-class PersonalData
+class Billing
 {
     /** @var string */
-    private $firstname;
+    private $firstName;
 
     /** @var string */
-    private $lastname;
+    private $lastName;
 
     /** @var string */
     private $phoneNumber;
@@ -23,21 +23,21 @@ class PersonalData
 
     public function __construct(array $context)
     {
-        $this->firstname = $context['firstname'];
-        $this->lastname = $context['lastname'];
+        $this->firstName = $context['firstName'];
+        $this->lastName = $context['lastName'];
         $this->phoneNumber = $context['phoneNumber'];
         $this->email = $context['email'];
-        $this->address = new Address($context);
+        $this->address = new Address($context['address']);
     }
 
-    public function getFirstname(): string
+    public function getFirstName(): string
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
-    public function getLastname(): string
+    public function getLastName(): string
     {
-        return $this->lastname;
+        return $this->lastName;
     }
 
     public function getPhoneNumber(): string

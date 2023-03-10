@@ -13,13 +13,13 @@ class AuthConfig
     private $publicKey;
 
     /** @var string */
-    private $secretKey;
+    private $privateKey;
 
-    public function __construct(string $shopId, string $apiKey, string $secretKey)
+    public function __construct(string $shopId, string $publicKey, string $privateKey)
     {
         $this->shopId = $shopId;
-        $this->publicKey = $apiKey;
-        $this->secretKey = $secretKey;
+        $this->publicKey = $publicKey;
+        $this->privateKey = $privateKey;
     }
 
     public function getShopId(): string
@@ -32,8 +32,8 @@ class AuthConfig
         return $this->publicKey;
     }
 
-    public function getSecretKey(): string
+    public function getPrivateKey(): string
     {
-        return $this->secretKey;
+        return $this->privateKey;
     }
 }
