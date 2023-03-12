@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PayEye\Lib\Test;
 
 use PayEye\Lib\Auth\AuthConfig;
@@ -19,7 +21,7 @@ trait TestCaseTrait
 
     protected function assertPayEyeException(PayEyePaymentException $exception): void
     {
-        $this->assertEquals($exception->getStatusCode(), $this->response->getCode(), 'AssertPayEyeException: Invalid status code');
+        $this->assertStatusCode($exception->getStatusCode());
         $this->assertEquals(
             $exception->getErrorCode(),
             ErrorResponse::createFromArray($this->response->getArrayResponse())->getErrorCode(),
@@ -27,23 +29,36 @@ trait TestCaseTrait
         );
     }
 
-    protected function post(string $url, array $payload, AuthConfig $authConfig): void
+    protected function assertStatusCode(int $code): void
     {
-        $this->response = $this->request('POST', $url, $payload, $authConfig);
+        $this->assertEquals($code, $this->response->getCode(), 'Invalid status code');
     }
 
-    protected function request(string $method, string $url, array $data, AuthConfig $authConfig): HttpResponse
+    protected function delete(string $url, array $payload): void
     {
-        $content = array_merge($this->authData($authConfig), $data);
+        $this->response = $this->request('DELETE', $url, $payload);
+    }
 
+    protected function post(string $url, array $payload): void
+    {
+        $this->response = $this->request('POST', $url, $payload);
+    }
+
+    protected function put(string $url, array $payload): void
+    {
+        $this->response = $this->request('PUT', $url, $payload);
+    }
+
+    protected function request(string $method, string $url, array $data): HttpResponse
+    {
         try {
-            return HttpClient::request($method, $url, $content);
+            return HttpClient::request($method, $url, $data);
         } catch (HttpException $e) {
             return new HttpResponse($e->getCode(), $e->getMessage());
         }
     }
 
-    private function authData(AuthConfig $authConfig): array
+    protected function addSignature(AuthConfig $authConfig): array
     {
         $payload = [];
         $authService = new AuthService(new HashService($authConfig), $payload, $payload);

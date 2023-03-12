@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Order;
 
+use PayEye\Lib\Enum\SignatureFrom;
 use PayEye\Lib\Tool\Builder;
 
 class OrderResponseModel
@@ -29,7 +30,7 @@ class OrderResponseModel
     public $currency;
 
     /** @var string[] */
-    public $signatureFrom;
+    public $signatureFrom = SignatureFrom::CREATE_ORDER_RESPONSE;
 
     public static function createFromArray(array $context): self
     {
@@ -46,12 +47,14 @@ class OrderResponseModel
     public function setCheckoutUrl(string $checkoutUrl): self
     {
         $this->checkoutUrl = $checkoutUrl;
+
         return $this;
     }
 
     public function setOrderId(string $orderId): self
     {
         $this->orderId = $orderId;
+
         return $this;
     }
 
@@ -61,6 +64,7 @@ class OrderResponseModel
     public function setTotalAmount($totalAmount): self
     {
         $this->totalAmount = $totalAmount;
+
         return $this;
     }
 
@@ -70,6 +74,7 @@ class OrderResponseModel
     public function setCartAmount($cartAmount): self
     {
         $this->cartAmount = $cartAmount;
+
         return $this;
     }
 
@@ -79,12 +84,14 @@ class OrderResponseModel
     public function setShippingAmount($shippingAmount): self
     {
         $this->shippingAmount = $shippingAmount;
+
         return $this;
     }
 
     public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
+
         return $this;
     }
 
@@ -94,6 +101,7 @@ class OrderResponseModel
     public function setSignatureFrom(array $signatureFrom): self
     {
         $this->signatureFrom = $signatureFrom;
+
         return $this;
     }
 }

@@ -4,27 +4,36 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Order;
 
+use PayEye\Lib\Tool\Builder;
+
 class OrderUpdateStatusRequestModel
 {
-    /** @var string */
-    private $orderId;
+    use Builder;
 
     /** @var string */
-    private $status;
+    public $orderId;
 
-    public function __construct(array $request)
+    /** @var string */
+    public $status;
+
+    public static function createFromArray(array $context): self
     {
-        $this->orderId = $request['orderId'];
-        $this->status = $request['status'];
+        return self::builder()
+            ->setOrderId($context['orderId'])
+            ->setStatus($context['status']);
     }
 
-    public function getOrderId(): string
+    public function setOrderId(string $orderId): self
     {
-        return $this->orderId;
+        $this->orderId = $orderId;
+
+        return $this;
     }
 
-    public function getStatus(): string
+    public function setStatus(string $status): self
     {
-        return $this->status;
+        $this->status = $status;
+
+        return $this;
     }
 }
