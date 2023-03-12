@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PayEye\Lib\Coupon;
+namespace PayEye\Lib\PromoCode;
 
 use PayEye\Lib\Tool\Builder;
 
-class CouponResponseModel
+class PromoCodeResponseModel
 {
     use Builder;
 
     /** @var string */
-    public $status;
+    public $status = 'OK';
 
     /** @var string[] */
     public $signatureFrom;
@@ -22,12 +22,14 @@ class CouponResponseModel
     public function setSignatureFrom(array $signatureFrom): self
     {
         $this->signatureFrom = $signatureFrom;
+
         return $this;
     }
 
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 }

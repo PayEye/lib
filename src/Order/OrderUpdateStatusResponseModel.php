@@ -4,18 +4,36 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Order;
 
+use PayEye\Lib\Enum\SignatureFrom;
+use PayEye\Lib\Tool\Builder;
+
 class OrderUpdateStatusResponseModel
 {
-    /** @var string */
-    private $status;
+    use Builder;
 
-    public function __construct(array $request)
+    /** @var string */
+    public $status = 'OK';
+
+    /** @var array */
+    public $signatureFrom = SignatureFrom::UPDATE_STATUS_ORDER_RESPONSE;
+
+    public static function createFromArray(array $context): self
     {
-        $this->status = $request['status'];
+        return self::builder()
+            ->setStatus($context['status']);
     }
 
-    public function getStatus(): string
+    public function setStatus(string $status): self
     {
-        return $this->status;
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function setSignatureFrom(array $signatureFrom): self
+    {
+        $this->signatureFrom = $signatureFrom;
+
+        return $this;
     }
 }

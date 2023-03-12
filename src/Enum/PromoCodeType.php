@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Enum;
 
-abstract class CouponType
+abstract class PromoCodeType
 {
     public const CONSTANT_DISCOUNT_VALUE = 'CONSTANT_DISCOUNT_VALUE';
     public const PERCENTAGE_DISCOUNT_VALUE = 'PERCENTAGE_DISCOUNT_VALUE';

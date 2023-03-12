@@ -31,7 +31,7 @@ class HttpClient
     /**
      * @throws HttpException
      */
-    protected static function request(string $requestType, string $url, $data = null): HttpResponse
+    public static function request(string $requestType, string $url, $data = null): HttpResponse
     {
         $curl = curl_init($url);
 
