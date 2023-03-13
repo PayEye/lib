@@ -12,7 +12,7 @@ class CartRequestModel
     private $cartId;
 
     /** @var null|string */
-    private $deliveryType;
+    private $shippingProvider;
 
     /** @var null|string */
     private $shippingId;
@@ -24,7 +24,7 @@ class CartRequestModel
     {
         $this->cartId = $request['cartId'];
         $this->shippingId = $request['shippingId'] ?? null;
-        $this->deliveryType = $request['deliveryType'] ?? null;
+        $this->shippingProvider = $request['shippingProvider'] ?? null;
 
         $shipping = $request['shipping'] ?? null;
         if ($shipping) {
@@ -37,9 +37,9 @@ class CartRequestModel
         return $this->cartId;
     }
 
-    public function getDeliveryType(): ?string
+    public function getShippingProvider(): ?string
     {
-        return $this->deliveryType;
+        return $this->shippingProvider;
     }
 
     public function getShippingId(): ?string
