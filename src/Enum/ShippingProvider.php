@@ -2,7 +2,7 @@
 
 namespace PayEye\Lib\Enum;
 
-abstract class ShippingType
+abstract class ShippingProvider
 {
     public const INPOST = 'INPOST';
     public const DHL = 'DHL';
