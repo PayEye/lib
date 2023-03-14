@@ -10,7 +10,7 @@ class Address
     private $street;
 
     /** @var null|string */
-    private $homeNumber;
+    private $buildingNumber;
 
     /** @var null|string */
     private $flatNumber;
@@ -33,7 +33,7 @@ class Address
     public function __construct(array $context)
     {
         $this->street = $context['street'];
-        $this->homeNumber = $context['homeNumber'];
+        $this->buildingNumber = $context['buildingNumber'];
         $this->flatNumber = $context['flatNumber'];
         $this->postCode = $context['postCode'];
         $this->city = $context['city'];
@@ -41,8 +41,8 @@ class Address
 
         $this->firstLine = $this->street ?? $this->city;
 
-        if ($this->homeNumber) {
-            $this->firstLine .= ' '.$this->homeNumber;
+        if ($this->buildingNumber) {
+            $this->firstLine .= ' '.$this->buildingNumber;
 
             if ($this->flatNumber) {
                 $this->firstLine .= '/'.$this->flatNumber;
@@ -59,9 +59,9 @@ class Address
         return $this->street;
     }
 
-    public function getHomeNumber(): ?string
+    public function getBuildingNumber(): ?string
     {
-        return $this->homeNumber;
+        return $this->buildingNumber;
     }
 
     public function getFlatNumber(): ?string

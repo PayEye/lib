@@ -19,8 +19,8 @@ class ShippingMethod
     /** @var int */
     public $cost;
 
-    /** @var int */
-    public $regularCost;
+//    /** @var int */
+//    public $regularCost;
 
     /** @var string */
     public $type;
@@ -31,7 +31,7 @@ class ShippingMethod
             ->setId($context['id'])
             ->setLabel($context['label'])
             ->setCost($context['cost'])
-            ->setRegularCost($context['regularCost'])
+//            ->setRegularCost($context['regularCost'])
             ->setType($context['type']);
     }
 
@@ -55,8 +55,8 @@ class ShippingMethod
 
     public function setRegularCost(int $regularCost): self
     {
-        $this->regularCost = $regularCost;
-        return $this;
+//        $this->regularCost = $regularCost;
+//        return $this;
     }
 
     public function setType(string $type): self
