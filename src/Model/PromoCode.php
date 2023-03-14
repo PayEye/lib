@@ -62,6 +62,6 @@ class PromoCode
     public function setPayeyeCode(bool $payeyeCode): self
     {
 //        $this->payeyeCode = $payeyeCode;
-//        return $this;
+        return $this;
     }
 }

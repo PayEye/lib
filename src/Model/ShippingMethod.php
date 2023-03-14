@@ -56,7 +56,7 @@ class ShippingMethod
     public function setRegularCost(int $regularCost): self
     {
 //        $this->regularCost = $regularCost;
-//        return $this;
+        return $this;
     }
 
     public function setType(string $type): self
