@@ -44,7 +44,7 @@ class OrderRequestModel
         $this->cartHash = $request['cartHash'];
         $this->shippingProvider = $request['shippingProvider'];
 
-        $invoice = $request['invoice'];
+        $invoice = $request['hasInvoice'];
         if ($this->hasInvoice) {
             $this->invoice = new Invoice($invoice);
         }
