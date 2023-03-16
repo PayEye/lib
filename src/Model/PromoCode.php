@@ -22,8 +22,8 @@ class PromoCode
     /** @var bool */
     public $freeDelivery;
 
-//    /** @var bool */
-//    public $payeyeCode;
+    /** @var bool */
+    public $payeyeCode;
 
     public static function createFromArray(array $context): self
     {
@@ -31,8 +31,8 @@ class PromoCode
             ->setCode($context['code'])
             ->setType($context['type'])
             ->setValue($context['value'])
-            ->setFreeDelivery($context['freeDelivery']);
-//            ->setPayeyeCode($context['payeyeCode']);
+            ->setFreeDelivery($context['freeDelivery'])
+            ->setPayeyeCode($context['payeyeCode']);
     }
 
     public function setCode(?string $code): self
@@ -61,7 +61,7 @@ class PromoCode
 
     public function setPayeyeCode(bool $payeyeCode): self
     {
-//        $this->payeyeCode = $payeyeCode;
+        $this->payeyeCode = $payeyeCode;
         return $this;
     }
 }
