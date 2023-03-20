@@ -10,10 +10,10 @@ class Location
 {
     use Builder;
 
-    /** @var double */
+    /** @var float */
     public $lat;
 
-    /** @var double */
+    /** @var float */
     public $lng;
 
     public static function createFromArray(array $context): self
