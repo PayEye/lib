@@ -4,18 +4,37 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Model;
 
+use PayEye\Lib\Tool\Builder;
+
 class Location
 {
-    /** @var double */
-    private $lat;
+    use Builder;
 
-    /** @var double */
-    private $lng;
+    /** @var float */
+    public $lat;
 
-    public function __construct(array $context)
+    /** @var float */
+    public $lng;
+
+    public static function createFromArray(array $context): self
     {
-        $this->lat = $context['lat'];
-        $this->lng = $context['lng'];
+        return self::builder()
+            ->setLat($context['lat'])
+            ->setLng($context['lng']);
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
     }
 
     public function getLat(): float

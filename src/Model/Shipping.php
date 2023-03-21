@@ -12,6 +12,9 @@ class Shipping
     /** @var string */
     private $lastName;
 
+    /** @var string */
+    private $label;
+
     /** @var Address */
     private $address;
 
@@ -22,11 +25,12 @@ class Shipping
     {
         $this->firstName = $context['firstName'];
         $this->lastName = $context['lastName'];
+        $this->label = $context['label'];
         $this->address = new Address($context['address']);
 
         $pickupPoint = $context['pickupPoint'] ?? null;
         if ($pickupPoint) {
-            $this->pickupPoint = new PickupPoint($context['pickupPoint']);
+            $this->pickupPoint = PickupPoint::createFromArray($context['pickupPoint']);
         }
     }
 
@@ -38,6 +42,11 @@ class Shipping
     public function getLastName(): string
     {
         return $this->lastName;
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
     }
 
     public function getAddress(): Address
