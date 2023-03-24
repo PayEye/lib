@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Cart;
 
+use PayEye\Lib\Model\Billing;
 use PayEye\Lib\Model\Shipping;
 
 class CartRequestModel
@@ -12,18 +13,27 @@ class CartRequestModel
     private $cartId;
 
     /** @var null|string */
-    private $shippingProvider;
-
-    /** @var null|string */
     private $shippingId;
+
+    /** @var null|Billing */
+    private $billing;
 
     /** @var null|Shipping */
     private $shipping;
+
+    /** @var null|string */
+    private $shippingProvider;
 
     public function __construct(array $request)
     {
         $this->cartId = $request['cartId'];
         $this->shippingId = $request['shippingId'] ?? null;
+
+        $billing = $request['billing'] ?? null;
+        if ($billing) {
+            $this->billing = new Billing($billing);
+        }
+
         $this->shippingProvider = $request['shippingProvider'] ?? null;
 
         $shipping = $request['shipping'] ?? null;
@@ -37,14 +47,19 @@ class CartRequestModel
         return $this->cartId;
     }
 
-    public function getShippingProvider(): ?string
-    {
-        return $this->shippingProvider;
-    }
-
     public function getShippingId(): ?string
     {
         return $this->shippingId;
+    }
+
+    public function getBilling(): ?Billing
+    {
+        return $this->billing;
+    }
+
+    public function getShippingProvider(): ?string
+    {
+        return $this->shippingProvider;
     }
 
     public function getShipping(): ?Shipping
