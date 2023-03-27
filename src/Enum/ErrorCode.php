@@ -16,6 +16,7 @@ abstract class ErrorCode
     public const APPLIED_COUPON = 'APPLIED_COUPON';
     public const INVALID_SHIPPING = 'INVALID_SHIPPING';
     public const ORDER_NOT_FOUND = 'ORDER_NOT_FOUND';
+    public const ORDER_ALREADY_EXISTS = 'ORDER_ALREADY_EXISTS';
     public const ORDER_PAID = 'ORDER_PAID';
     public const ORDER_FAILED = 'ORDER_FAILED';
     public const SHOP_ID_NOT_MATCHED = 'SHOP_ID_NOT_MATCHED';
