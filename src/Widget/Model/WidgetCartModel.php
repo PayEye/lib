@@ -28,6 +28,9 @@ class WidgetCartModel
     /** @var int */
     public $count;
 
+    /** @var string */
+    public $url;
+
     public function setId(string $id): self
     {
         $this->id = $id;
@@ -66,6 +69,13 @@ class WidgetCartModel
     public function setCount(int $count): self
     {
         $this->count = $count;
+
+        return $this;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }
