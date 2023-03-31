@@ -26,23 +26,32 @@ class Product
     public $quantity;
 
     /** @var string|null */
-    public $imageUrl;
+    public $imageUrl = null;
+
+    /** @var ProductAttribute[] */
+    public $attributes;
 
     public static function createFromArray(array $context): self
     {
+        $attributes = array_map(static function (array $attribute) {
+            return ProductAttribute::createFromArray($attribute);
+        }, $context['attributes']);
+
         return self::builder()
             ->setId($context['id'])
             ->setPrice($context['price'])
             ->setRegularPrice($context['regularPrice'])
             ->setName($context['name'])
             ->setQuantity($context['quantity'])
-            ->setImageUrl($context['imageUrl']);
+            ->setImageUrl($context['imageUrl'])
+            ->setAttributes($attributes);
     }
 
 
     public function setId(int $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -50,6 +59,7 @@ class Product
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
         return $this;
     }
 
@@ -57,6 +67,7 @@ class Product
     public function setRegularPrice(int $regularPrice): self
     {
         $this->regularPrice = $regularPrice;
+
         return $this;
     }
 
@@ -64,6 +75,7 @@ class Product
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -71,12 +83,24 @@ class Product
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
         return $this;
     }
 
     public function setImageUrl(?string $imageUrl): self
     {
         $this->imageUrl = $imageUrl;
+
+        return $this;
+    }
+
+    /**
+     * @param ProductAttribute[] $attributes
+     */
+    public function setAttributes(array $attributes): self
+    {
+        $this->attributes = $attributes;
+
         return $this;
     }
 }
