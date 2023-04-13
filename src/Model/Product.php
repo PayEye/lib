@@ -25,8 +25,8 @@ class Product
     /** @var int */
     public $quantity;
 
-    /** @var ProductImage */
-    public $image;
+    /** @var string|null */
+    public $imageUrl = null;
 
     /** @var ProductAttribute[] */
     public $attributes;
@@ -37,15 +37,13 @@ class Product
             return ProductAttribute::createFromArray($attribute);
         }, $context['attributes']);
 
-        $image = ProductImage::createFromArray($context['image']);
-
         return self::builder()
             ->setId($context['id'])
             ->setPrice($context['price'])
             ->setRegularPrice($context['regularPrice'])
             ->setName($context['name'])
             ->setQuantity($context['quantity'])
-            ->setImage($image)
+            ->setImageUrl($context['imageUrl'])
             ->setAttributes($attributes);
     }
 
@@ -89,9 +87,9 @@ class Product
         return $this;
     }
 
-    public function setImage(ProductImage $image): self
+    public function setImageUrl(?string $imageUrl): self
     {
-        $this->image = $image;
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }

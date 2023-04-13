@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PayEye\Lib\Refund;
+namespace PayEye\Lib\Returns;
 
 use PayEye\Lib\Tool\Builder;
 
-class RefundResponseModel
+class ReturnResponseModel
 {
     use Builder;
 
     /** @var string */
-    public $refundId;
+    public $returnId;
 
     /**
      * @var string
-     * @see RefundStatus
+     * @see ReturnStatus
      */
     public $status;
 
@@ -25,13 +25,13 @@ class RefundResponseModel
     public static function createFromArray(array $context): self
     {
         return self::builder()
-            ->setRefundId($context['refundId'])
+            ->setReturnId($context['refundId'])
             ->setStatus($context['status']);
     }
 
-    public function setRefundId(string $refundId): self
+    public function setReturnId(string $returnId): self
     {
-        $this->refundId = $refundId;
+        $this->returnId = $returnId;
 
         return $this;
     }
