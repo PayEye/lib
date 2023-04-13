@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PayEye\Lib\Refund;
+namespace PayEye\Lib\Returns;
 
 use PayEye\Lib\Model\RefundProduct;
 use PayEye\Lib\Tool\Builder;
 
-class RefundRequestModel
+class ReturnRequestModel
 {
     use Builder;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Enum;
 
-abstract class RefundStatus
+abstract class ReturnStatus
 {
     public const CREATED = 'CREATED';
     public const ACCEPTED = 'ACCEPTED';
