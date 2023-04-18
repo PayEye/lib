@@ -8,7 +8,7 @@ use PayEye\Lib\Model\Invoice;
 use PayEye\Lib\Model\Billing;
 use PayEye\Lib\Model\Shipping;
 
-class OrderRequestModel
+class OrderCreateRequestModel
 {
     /** @var string */
     private $cartId;

@@ -7,14 +7,14 @@ namespace PayEye\Lib\Returns;
 use PayEye\Lib\Model\RefundProduct;
 use PayEye\Lib\Tool\Builder;
 
-class ReturnRequestModel
+class ReturnCreateRequestModel
 {
     use Builder;
 
     /** @var string */
     public $orderId;
 
-    /** @var float */
+    /** @var int */
     public $amount;
 
     /** @var string */
@@ -53,7 +53,7 @@ class ReturnRequestModel
         return $this;
     }
 
-    public function setAmount(float $amount): self
+    public function setAmount(int $amount): self
     {
         $this->amount = $amount;
 

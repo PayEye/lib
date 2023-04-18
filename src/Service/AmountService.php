@@ -14,4 +14,13 @@ class AmountService
     {
         return (int)round(($price * 100), 0);
     }
+
+    /**
+     * @param float|int $price
+     * @return float
+     */
+    public function convertIntegerToFloat($price): float
+    {
+        return (int)round(($price / 100), 0);
+    }
 }

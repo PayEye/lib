@@ -7,7 +7,7 @@ namespace PayEye\Lib\Order;
 use PayEye\Lib\Enum\SignatureFrom;
 use PayEye\Lib\Tool\Builder;
 
-class OrderResponseModel
+class OrderCreateResponseModel
 {
     use Builder;
 
