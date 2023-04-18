@@ -21,6 +21,6 @@ class AmountService
      */
     public function convertIntegerToFloat($price): float
     {
-        return (int)round(($price / 100), 0);
+        return round(($price / 100), 2);
     }
 }
