@@ -11,6 +11,8 @@ use PayEye\Lib\HttpClient\Infrastructure\HttpClient;
 use PayEye\Lib\HttpClient\Model\HttpResponse;
 use PayEye\Lib\HttpClient\Model\RefreshCartRequest;
 use PayEye\Lib\HttpClient\Model\RefreshCartResponse;
+use PayEye\Lib\HttpClient\Model\ReturnStatusRequest;
+use PayEye\Lib\HttpClient\Model\ReturnStatusResponse;
 
 class PayEyeHttpClient
 {
@@ -30,6 +32,16 @@ class PayEyeHttpClient
         $response = $this->post('/plugin/event', $data->toArray(), $authService);
 
         return RefreshCartResponse::createFromArray($response->getArrayResponse());
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public function returnStatus(ReturnStatusRequest $data, AuthService $authService): ReturnStatusResponse
+    {
+        $response = $this->post('/plugin/returns', $data->toArray(), $authService);
+
+        return ReturnStatusResponse::createFromArray($response->getArrayResponse());
     }
 
     /**

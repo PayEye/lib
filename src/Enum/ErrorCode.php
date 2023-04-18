@@ -22,6 +22,7 @@ abstract class ErrorCode
     public const SHOP_ID_NOT_MATCHED = 'SHOP_ID_NOT_MATCHED';
     public const PAYEYE_PAYMENT_IS_DISABLED = 'PAYEYE_PAYMENT_IS_DISABLED';
     public const SHIPPING_PROVIDER_NOT_MATCHED = 'SHIPPING_PROVIDER_NOT_MATCHED';
+    public const RETURN_NOT_FOUND = 'RETURN_NOT_FOUND';
 
     public const WOOCOMMERCE = 'WOOCOMMERCE';
     public const PRESTASHOP = 'PRESTASHOP';
