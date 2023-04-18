@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Returns;
 
+use PayEye\Lib\Enum\SignatureFrom;
 use PayEye\Lib\Tool\Builder;
 
-class ReturnResponseModel
+class ReturnCreateResponseModel
 {
     use Builder;
-
-    /** @var string */
-    public $shopIdentifier;
 
     /** @var string */
     public $returnId;
@@ -23,21 +21,13 @@ class ReturnResponseModel
     public $status;
 
     /** @var string[] */
-    public $signatureFrom;
+    public $signatureFrom = SignatureFrom::RETURN_CREATE_RESPONSE;
 
     public static function createFromArray(array $context): self
     {
         return self::builder()
-            ->setShopIdentifier($context['shopIdentifier'])
             ->setReturnId($context['returnId'])
             ->setStatus($context['status']);
-    }
-
-    public function setShopIdentifier(string $shopIdentifier): self
-    {
-        $this->shopIdentifier = $shopIdentifier;
-
-        return $this;
     }
 
     public function setReturnId(string $returnId): self
