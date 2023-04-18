@@ -11,6 +11,9 @@ class ReturnResponseModel
     use Builder;
 
     /** @var string */
+    public $shopIdentifier;
+
+    /** @var string */
     public $returnId;
 
     /**
@@ -25,8 +28,16 @@ class ReturnResponseModel
     public static function createFromArray(array $context): self
     {
         return self::builder()
-            ->setReturnId($context['refundId'])
+            ->setShopIdentifier($context['shopIdentifier'])
+            ->setReturnId($context['returnId'])
             ->setStatus($context['status']);
+    }
+
+    public function setShopIdentifier(string $shopIdentifier): self
+    {
+        $this->shopIdentifier = $shopIdentifier;
+
+        return $this;
     }
 
     public function setReturnId(string $returnId): self

@@ -14,6 +14,12 @@ class ReturnRequestModel
     /** @var string */
     public $orderId;
 
+    /** @var float */
+    public $amount;
+
+    /** @var string */
+    public $currency;
+
     /** @var RefundProduct[] */
     public $products;
 
@@ -25,6 +31,8 @@ class ReturnRequestModel
 
         return self::builder()
             ->setOrderId($context['orderId'])
+            ->setAmount($context['amount'])
+            ->setCurrency($context['currency'])
             ->setProducts($products);
     }
 
@@ -41,6 +49,20 @@ class ReturnRequestModel
     public function setProducts(array $products): self
     {
         $this->products = $products;
+
+        return $this;
+    }
+
+    public function setAmount(float $amount): self
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function setCurrency(string $currency): self
+    {
+        $this->currency = $currency;
 
         return $this;
     }

@@ -12,5 +12,7 @@ abstract class SignatureFrom
     public const CREATE_ORDER_RESPONSE = ['checkoutUrl', 'orderId', 'totalAmount', 'cartAmount', 'shippingAmount', 'currency'];
     public const UPDATE_STATUS_ORDER_RESPONSE = ['status'];
     public const HANDLE_ERROR = ['errorMessage', 'errorCode'];
-    public const RETURN_RESPONSE = ['returnId','status'];
+    public const RETURN_RESPONSE = ['shopIdentifier', 'returnId', 'status'];
+    public const RETURN_STATUS_REQUEST = ['shopIdentifier', 'returnId', 'status'];
+    public const UPDATE_STATUS_RETURN_RESPONSE = ['status'];
 }
