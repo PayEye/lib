@@ -19,6 +19,9 @@ class Product
     /** @var int */
     public $regularPrice;
 
+    /** @var int */
+    public $totalPrice;
+
     /** @var string */
     public $name;
 
@@ -41,6 +44,7 @@ class Product
             ->setId($context['id'])
             ->setPrice($context['price'])
             ->setRegularPrice($context['regularPrice'])
+            ->setTotalPrice($context['totalPrice'])
             ->setName($context['name'])
             ->setQuantity($context['quantity'])
             ->setImages(ProductImages::createFromArray($context['images']))
@@ -71,6 +75,12 @@ class Product
         return $this;
     }
 
+    public function setTotalPrice(int $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
 
     public function setName(string $name): self
     {
