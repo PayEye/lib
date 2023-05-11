@@ -22,6 +22,9 @@ class Product
     /** @var int */
     public $totalPrice;
 
+    /** @var int */
+    public $shopDiscountedPrice;
+
     /** @var string */
     public $name;
 
@@ -45,6 +48,7 @@ class Product
             ->setPrice($context['price'])
             ->setRegularPrice($context['regularPrice'])
             ->setTotalPrice($context['totalPrice'])
+            ->setShopDiscountedPrice($context['shopDiscountedPrice'])
             ->setName($context['name'])
             ->setQuantity($context['quantity'])
             ->setImages(ProductImages::createFromArray($context['images']))
@@ -78,6 +82,13 @@ class Product
     public function setTotalPrice(int $totalPrice): self
     {
         $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    public function setShopDiscountedPrice(int $shopDiscountedPrice): self
+    {
+        $this->shopDiscountedPrice = $shopDiscountedPrice;
 
         return $this;
     }
