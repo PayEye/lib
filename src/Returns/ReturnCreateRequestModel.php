@@ -14,9 +14,6 @@ class ReturnCreateRequestModel
     /** @var string */
     public $orderId;
 
-    /** @var int */
-    public $amount;
-
     /** @var string */
     public $currency;
 
@@ -31,7 +28,6 @@ class ReturnCreateRequestModel
 
         return self::builder()
             ->setOrderId($context['orderId'])
-            ->setAmount($context['amount'])
             ->setCurrency($context['currency'])
             ->setProducts($products);
     }
@@ -49,13 +45,6 @@ class ReturnCreateRequestModel
     public function setProducts(array $products): self
     {
         $this->products = $products;
-
-        return $this;
-    }
-
-    public function setAmount(int $amount): self
-    {
-        $this->amount = $amount;
 
         return $this;
     }

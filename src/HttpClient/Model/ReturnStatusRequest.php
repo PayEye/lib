@@ -22,6 +22,9 @@ class ReturnStatusRequest
      */
     public $status;
 
+    /** @var int */
+    public $amount;
+
     public function setShopIdentifier(string $shopIdentifier): self
     {
         $this->shopIdentifier = $shopIdentifier;
@@ -39,6 +42,13 @@ class ReturnStatusRequest
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function setAmount(int $amount): self
+    {
+        $this->amount = $amount;
 
         return $this;
     }
