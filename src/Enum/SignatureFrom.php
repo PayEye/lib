@@ -13,6 +13,6 @@ abstract class SignatureFrom
     public const UPDATE_STATUS_ORDER_RESPONSE = ['status'];
     public const HANDLE_ERROR = ['errorMessage', 'errorCode'];
     public const RETURN_CREATE_RESPONSE = ['returnId', 'status'];
-    public const RETURN_STATUS_REQUEST = ['shopIdentifier', 'returnId', 'status'];
+    public const RETURN_STATUS_REQUEST = ['shopIdentifier', 'returnId', 'status', 'amount'];
     public const UPDATE_STATUS_RETURN_RESPONSE = ['status'];
 }
