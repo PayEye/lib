@@ -13,6 +13,9 @@ class Product
     /** @var int */
     public $id;
 
+    /** @var string|null */
+    public $variantId = null;
+
     /** @var int */
     public $price;
 
@@ -43,6 +46,7 @@ class Product
         return self::builder()
             ->setId($context['id'])
             ->setPrice($context['price'])
+            ->setVariantId($context['variantId'] ?? null)
             ->setRegularPrice($context['regularPrice'])
             ->setTotalPrice($context['totalPrice'])
             ->setName($context['name'])
@@ -59,9 +63,16 @@ class Product
         return $this;
     }
 
-
-    public function setPrice(int $price): self
+    public function setVariantId(?string $variantId): self
     {
+        $this->variantId = $variantId;
+
+        return $this;
+    }
+
+    public function setPrice(
+        int $price
+    ): self {
         $this->price = $price;
 
         return $this;

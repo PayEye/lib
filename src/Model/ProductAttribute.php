@@ -10,6 +10,9 @@ class ProductAttribute
 {
     use Builder;
 
+    /** @var string|null */
+    public $id = null;
+
     /** @var string */
     public $name;
 
@@ -19,6 +22,7 @@ class ProductAttribute
     public static function createFromArray(array $context): self
     {
         return self::builder()
+            ->setId($context['id'] ?? null)
             ->setName($context['name'])
             ->setValue($context['value']);
     }
@@ -33,6 +37,13 @@ class ProductAttribute
     public function setValue(string $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function setId(?string $id): self
+    {
+        $this->id = $id;
 
         return $this;
     }
