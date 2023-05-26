@@ -38,7 +38,7 @@ class RefundProduct
         return $this;
     }
 
-    public function setVariantId(string $variantId): self
+    public function setVariantId(?string $variantId): self
     {
         $this->variantId = $variantId;
 
