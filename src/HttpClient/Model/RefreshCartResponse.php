@@ -15,32 +15,55 @@ class RefreshCartResponse
     /** @var string */
     private $signature;
 
-    public function __construct(string $status, array $signatureFrom, string $signature)
+    /**
+     * @param string $status
+     * @param array $signatureFrom
+     * @param string $signature
+     * @return RefreshCartResponse
+     */
+    public static function create(string $status, array $signatureFrom, string $signature): self
     {
-        $this->status = $status;
-        $this->signatureFrom = $signatureFrom;
-        $this->signature = $signature;
+        $object = new self();
+
+        $object->status = $status;
+        $object->signatureFrom = $signatureFrom;
+        $object->signature = $signature;
+
+        return $object;
     }
 
+    /**
+     * @param array $context
+     * @return RefreshCartResponse
+     */
     public static function createFromArray(array $context): self
     {
-        return new self(
+        return self::create(
             $context['status'],
             $context['signatureFrom'],
             $context['signature']
         );
     }
 
+    /**
+     * @return string
+     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
+    /**
+     * @return string
+     */
     public function getSignature(): string
     {
         return $this->signature;
     }
 
+    /**
+     * @return array
+     */
     public function getSignatureFrom(): array
     {
         return $this->signatureFrom;

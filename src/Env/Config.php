@@ -17,22 +17,35 @@ class Config
     /** @var self */
     private static $instance;
 
-    public function __construct(string $url, string $deepLink)
+    /**
+     * @param string $url
+     * @param string $deepLink
+     * @return Config
+     */
+    public static function create(string $url, string $deepLink): self
     {
-        $this->url = $url;
-        $this->deepLink = $deepLink;
+        $object = new self();
 
-        self::$instance = $this;
+        $object->url = $url;
+        $object->deepLink = $deepLink;
+
+        self::$instance = $object;
+
+        return $object;
     }
 
+    /**
+     * @param array $context
+     * @return Config
+     */
     public static function createFromArray(array $context): self
     {
-        return new self(
-            $context['url'],
-            $context['deepLinkUrl']
-        );
+        return self::create($context['url'], $context['deepLinkUrl']);
     }
 
+    /**
+     * @return Config
+     */
     public static function getInstance(): self
     {
         if (!self::$instance) {
@@ -42,13 +55,41 @@ class Config
         return self::$instance;
     }
 
+    /**
+     * @return string
+     */
     public function getUrl(): string
     {
         return $this->url;
     }
 
+    /**
+     * @return string
+     */
     public function getDeepLinkUrl(): string
     {
         return $this->deepLink;
+    }
+
+    /**
+     * @param string $url
+     * @return Config
+     */
+    public function setUrl(string $url): Config
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @param string $deepLink
+     * @return Config
+     */
+    public function setDeepLink(string $deepLink): Config
+    {
+        $this->deepLink = $deepLink;
+
+        return $this;
     }
 }

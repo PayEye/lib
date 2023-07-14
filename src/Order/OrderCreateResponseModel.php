@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PayEye\Lib\Order;
 
 use PayEye\Lib\Enum\SignatureFrom;
+use PayEye\Lib\Interfaces\SignedContent;
 use PayEye\Lib\Tool\Builder;
 
-class OrderCreateResponseModel
+class OrderCreateResponseModel implements SignedContent
 {
     use Builder;
 
@@ -29,9 +30,16 @@ class OrderCreateResponseModel
     /** @var string */
     public $currency;
 
-    /** @var string[] */
-    public $signatureFrom = SignatureFrom::CREATE_ORDER_RESPONSE;
+    /** @var string */
+    public $signature;
 
+    /** @var string[] */
+    public $signatureFrom = ['checkoutUrl', 'orderId', 'totalAmount', 'cartAmount', 'shippingAmount', 'currency'];
+
+    /**
+     * @param array $context
+     * @return OrderCreateResponseModel
+     */
     public static function createFromArray(array $context): self
     {
         return self::builder()
@@ -41,9 +49,14 @@ class OrderCreateResponseModel
             ->setCartAmount($context['cartAmount'])
             ->setShippingAmount($context['shippingAmount'])
             ->setCurrency($context['currency'])
+            ->setSignature($context['signature'])
             ->setSignatureFrom($context['signatureFrom']);
     }
 
+    /**
+     * @param string $checkoutUrl
+     * @return OrderCreateResponseModel
+     */
     public function setCheckoutUrl(string $checkoutUrl): self
     {
         $this->checkoutUrl = $checkoutUrl;
@@ -51,6 +64,10 @@ class OrderCreateResponseModel
         return $this;
     }
 
+    /**
+     * @param string $orderId
+     * @return OrderCreateResponseModel
+     */
     public function setOrderId(string $orderId): self
     {
         $this->orderId = $orderId;
@@ -60,6 +77,7 @@ class OrderCreateResponseModel
 
     /**
      * @param float|int $totalAmount
+     * @return OrderCreateResponseModel
      */
     public function setTotalAmount($totalAmount): self
     {
@@ -70,6 +88,7 @@ class OrderCreateResponseModel
 
     /**
      * @param float|int $cartAmount
+     * @return OrderCreateResponseModel
      */
     public function setCartAmount($cartAmount): self
     {
@@ -80,6 +99,7 @@ class OrderCreateResponseModel
 
     /**
      * @param float|int $shippingAmount
+     * @return OrderCreateResponseModel
      */
     public function setShippingAmount($shippingAmount): self
     {
@@ -88,6 +108,10 @@ class OrderCreateResponseModel
         return $this;
     }
 
+    /**
+     * @param string $currency
+     * @return OrderCreateResponseModel
+     */
     public function setCurrency(string $currency): self
     {
         $this->currency = $currency;
@@ -97,10 +121,86 @@ class OrderCreateResponseModel
 
     /**
      * @param string[] $signatureFrom
+     * @return OrderCreateResponseModel
      */
     public function setSignatureFrom(array $signatureFrom): self
     {
         $this->signatureFrom = $signatureFrom;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCheckoutUrl(): string
+    {
+        return $this->checkoutUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderId(): string
+    {
+        return $this->orderId;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getTotalAmount()
+    {
+        return $this->totalAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getCartAmount()
+    {
+        return $this->cartAmount;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getShippingAmount()
+    {
+        return $this->shippingAmount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSignatureFrom(): array
+    {
+        return $this->signatureFrom;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSignature(): string
+    {
+        return $this->signature;
+    }
+
+    /**
+     * @param string $signature
+     * @return OrderCreateResponseModel
+     */
+    public function setSignature(string $signature): self
+    {
+        $this->signature = $signature;
 
         return $this;
     }

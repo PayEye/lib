@@ -6,7 +6,6 @@ namespace PayEye\Lib\HttpClient;
 
 use PayEye\Lib\Env\Config;
 use PayEye\Lib\Auth\AuthService;
-use PayEye\Lib\HttpClient\Exception\HttpException;
 use PayEye\Lib\HttpClient\Infrastructure\HttpClient;
 use PayEye\Lib\HttpClient\Model\HttpResponse;
 use PayEye\Lib\HttpClient\Model\RefreshCartRequest;
@@ -19,13 +18,23 @@ class PayEyeHttpClient
     /** @var string */
     private $baseUrl;
 
-    public function __construct(Config $config)
+    /**
+     * @param \PayEye\Lib\Env\Config $config
+     * @return PayEyeHttpClient
+     */
+    public static function create(Config $config): self
     {
-        $this->baseUrl = $config->getUrl();
+        $object = new self();
+        $object->baseUrl = $config->getUrl();
+
+        return $object;
     }
 
     /**
-     * @throws HttpException
+     * @param \PayEye\Lib\HttpClient\Model\RefreshCartRequest $data
+     * @param \PayEye\Lib\Auth\AuthService $authService
+     * @return \PayEye\Lib\HttpClient\Model\RefreshCartResponse
+     * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
     public function refreshCart(RefreshCartRequest $data, AuthService $authService): RefreshCartResponse
     {
@@ -35,7 +44,10 @@ class PayEyeHttpClient
     }
 
     /**
-     * @throws HttpException
+     * @param \PayEye\Lib\HttpClient\Model\ReturnStatusRequest $data
+     * @param \PayEye\Lib\Auth\AuthService $authService
+     * @return \PayEye\Lib\HttpClient\Model\ReturnStatusResponse
+     * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
     public function returnStatus(ReturnStatusRequest $data, AuthService $authService): ReturnStatusResponse
     {
@@ -45,7 +57,11 @@ class PayEyeHttpClient
     }
 
     /**
-     * @throws HttpException
+     * @param string $pathUrl
+     * @param array $data
+     * @param \PayEye\Lib\Auth\AuthService $authService
+     * @return \PayEye\Lib\HttpClient\Model\HttpResponse
+     * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
     private function post(string $pathUrl, array $data, AuthService $authService): HttpResponse
     {
@@ -57,5 +73,24 @@ class PayEyeHttpClient
         $payload = array_merge($data, $auth);
 
         return HttpClient::post($this->baseUrl.$pathUrl, $payload);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUrl(): string
+    {
+        return $this->baseUrl;
+    }
+
+    /**
+     * @param string $baseUrl
+     * @return PayEyeHttpClient
+     */
+    public function setBaseUrl(string $baseUrl): self
+    {
+        $this->baseUrl = $baseUrl;
+
+        return $this;
     }
 }

@@ -9,6 +9,12 @@ use PayEye\Lib\Env\Config;
 
 class Deeplink
 {
+    /**
+     * @param \PayEye\Lib\Env\Config $config
+     * @param \PayEye\Lib\Auth\AuthConfig $authConfig
+     * @param string $cartId
+     * @return string
+     */
     public static function create(Config $config, AuthConfig $authConfig, string $cartId): string
     {
         $query = [

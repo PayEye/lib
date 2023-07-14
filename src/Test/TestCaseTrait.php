@@ -61,8 +61,8 @@ trait TestCaseTrait
     protected function addSignature(AuthConfig $authConfig): array
     {
         $payload = [];
-        $authService = new AuthService(new HashService($authConfig), $payload, $payload);
+        $authService = AuthService::create(HashService::create($authConfig), $payload, $payload);
 
-        return (new AuthRequest($payload, $authService->getSignature()))->toArray();
+        return (AuthRequest::create($payload, $authService->getSignature()))->toArray();
     }
 }

@@ -15,10 +15,14 @@ class ReturnStatusResponse
 
     /**
      * @var string
-     * @see TransferStatus
+     * @see \PayEye\Lib\Enum\TransferStatus
      */
     public $transferStatus;
 
+    /**
+     * @param array $context
+     * @return ReturnStatusResponse
+     */
     public static function createFromArray(array $context): self
     {
         return self::builder()
@@ -26,6 +30,10 @@ class ReturnStatusResponse
             ->setTransferStatus($context['transferStatus']);
     }
 
+    /**
+     * @param string $returnId
+     * @return ReturnStatusResponse
+     */
     public function setReturnId(string $returnId): self
     {
         $this->returnId = $returnId;
@@ -33,6 +41,10 @@ class ReturnStatusResponse
         return $this;
     }
 
+    /**
+     * @param string $transferStatus
+     * @return ReturnStatusResponse
+     */
     public function setTransferStatus(string $transferStatus): self
     {
         $this->transferStatus = $transferStatus;
@@ -40,5 +52,19 @@ class ReturnStatusResponse
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getReturnId(): string
+    {
+        return $this->returnId;
+    }
 
+    /**
+     * @return string
+     */
+    public function getTransferStatus(): string
+    {
+        return $this->transferStatus;
+    }
 }
