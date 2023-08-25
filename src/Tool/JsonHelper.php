@@ -6,9 +6,17 @@ use RuntimeException;
 
 class JsonHelper
 {
+    private const SERIALIZE_PRECISION_KEY = 'serialize_precision';
+
     public static function jsonEncode(array $data): string
     {
-        return json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $serializePrecisionValue = ini_get(self::SERIALIZE_PRECISION_KEY);
+        ini_set(self::SERIALIZE_PRECISION_KEY, -1);
+
+        $jsonString = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        ini_set(self::SERIALIZE_PRECISION_KEY, $serializePrecisionValue);
+        return $jsonString;
     }
 
     public static function jsonDecode($json): array
