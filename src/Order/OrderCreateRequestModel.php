@@ -31,7 +31,7 @@ class OrderCreateRequestModel
     /** @var string */
     private $cartHash;
 
-    /** @var string */
+    /** @var null|string */
     private $shippingProvider;
 
     public function __construct(array $request)
@@ -85,7 +85,7 @@ class OrderCreateRequestModel
         return $this->cartHash;
     }
 
-    public function getShippingProvider(): string
+    public function getShippingProvider(): ?string
     {
         return $this->shippingProvider;
     }
