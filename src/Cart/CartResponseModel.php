@@ -71,6 +71,7 @@ class CartResponseModel
             ->setCurrency($context['currency'])
             ->setProducts($products)
             ->setCartHash($context['cartHash'])
+            ->setCartType($context['cartType'])
             ->setSignatureFrom($context['signatureFrom']);
     }
 
