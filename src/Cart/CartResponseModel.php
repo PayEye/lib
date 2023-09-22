@@ -39,6 +39,12 @@ class CartResponseModel
     /** @var string */
     public $cartHash;
 
+    /**
+     * @var string
+     * @see CartType;
+     */
+    public $cartType;
+
     /** @var string[] */
     public $signatureFrom;
 
@@ -129,6 +135,13 @@ class CartResponseModel
     public function setCartHash(string $cartHash): self
     {
         $this->cartHash = $cartHash;
+
+        return $this;
+    }
+
+    public function setCartType(string $cartType): self
+    {
+        $this->cartType = $cartType;
 
         return $this;
     }
