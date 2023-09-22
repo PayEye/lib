@@ -14,6 +14,9 @@ class ReturnUpdateStatusRequestModel
     /** @var string */
     public $returnId;
 
+    /** @var string */
+    public $paymentId;
+
     /**
      * @var string
      * @see TransferStatus
@@ -24,12 +27,20 @@ class ReturnUpdateStatusRequestModel
     {
         return self::builder()
             ->setReturnId($context['returnId'])
+            ->setPaymentId($context['paymentId'])
             ->setTransferStatus($context['transferStatus']);
     }
 
     public function setReturnId(string $returnId): self
     {
         $this->returnId = $returnId;
+
+        return $this;
+    }
+
+    public function setPaymentId(string $paymentId): self
+    {
+        $this->paymentId = $paymentId;
 
         return $this;
     }
