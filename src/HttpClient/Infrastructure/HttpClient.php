@@ -13,7 +13,10 @@ use PayEye\Lib\Tool\JsonHelper;
 class HttpClient
 {
     /**
-     * @throws HttpException
+     * @param string $url
+     * @param $data
+     * @return \PayEye\Lib\HttpClient\Model\HttpResponse
+     * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
     public static function post(string $url, $data): HttpResponse
     {
@@ -21,7 +24,9 @@ class HttpClient
     }
 
     /**
-     * @throws HttpException
+     * @param string $url
+     * @return \PayEye\Lib\HttpClient\Model\HttpResponse
+     * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
     public static function get(string $url): HttpResponse
     {
@@ -29,7 +34,12 @@ class HttpClient
     }
 
     /**
-     * @throws HttpException
+     * @param string $requestType
+     * @param string $url
+     * @param $data
+     * @return \PayEye\Lib\HttpClient\Model\HttpResponse
+     * @throws \PayEye\Lib\HttpClient\Exception\HttpException
+     * @throws \PayEye\Lib\HttpClient\Exception\HttpNetworkException
      */
     public static function request(string $requestType, string $url, $data = null): HttpResponse
     {
@@ -65,7 +75,7 @@ class HttpClient
 
         curl_close($curl);
 
-        $response = new HttpResponse($httpCode, trim($response));
+        $response = HttpResponse::create($httpCode, trim($response));
 
         if ($response->getCode() !== HttpStatus::OK) {
             throw new HttpException($response->getResponse(), $response->getCode());

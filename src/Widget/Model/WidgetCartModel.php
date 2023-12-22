@@ -31,6 +31,10 @@ class WidgetCartModel
     /** @var string */
     public $url;
 
+    /**
+     * @param string $id
+     * @return WidgetCartModel
+     */
     public function setId(string $id): self
     {
         $this->id = $id;
@@ -38,6 +42,10 @@ class WidgetCartModel
         return $this;
     }
 
+    /**
+     * @param bool $open
+     * @return WidgetCartModel
+     */
     public function setOpen(bool $open): self
     {
         $this->open = $open;
@@ -45,6 +53,10 @@ class WidgetCartModel
         return $this;
     }
 
+    /**
+     * @param string $price
+     * @return WidgetCartModel
+     */
     public function setPrice(string $price): self
     {
         $this->price = $price;
@@ -52,6 +64,10 @@ class WidgetCartModel
         return $this;
     }
 
+    /**
+     * @param string $regularPrice
+     * @return WidgetCartModel
+     */
     public function setRegularPrice(string $regularPrice): self
     {
         $this->regularPrice = $regularPrice;
@@ -59,6 +75,10 @@ class WidgetCartModel
         return $this;
     }
 
+    /**
+     * @param string $qr
+     * @return WidgetCartModel
+     */
     public function setQr(string $qr): self
     {
         $this->qr = $qr;
@@ -66,6 +86,10 @@ class WidgetCartModel
         return $this;
     }
 
+    /**
+     * @param int $count
+     * @return WidgetCartModel
+     */
     public function setCount(int $count): self
     {
         $this->count = $count;
@@ -73,10 +97,70 @@ class WidgetCartModel
         return $this;
     }
 
+    /**
+     * @param string $url
+     * @return WidgetCartModel
+     */
     public function setUrl(string $url): self
     {
         $this->url = $url;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOpen(): bool
+    {
+        return $this->open;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrice(): string
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegularPrice(): string
+    {
+        return $this->regularPrice;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQr(): string
+    {
+        return $this->qr;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }

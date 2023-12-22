@@ -37,6 +37,10 @@ class Product
     /** @var ProductAttribute[] */
     public $attributes;
 
+    /**
+     * @param array $context
+     * @return Product
+     */
     public static function createFromArray(array $context): self
     {
         $attributes = array_map(static function (array $attribute) {
@@ -56,6 +60,10 @@ class Product
     }
 
 
+    /**
+     * @param int $id
+     * @return Product
+     */
     public function setId(int $id): self
     {
         $this->id = $id;
@@ -63,6 +71,10 @@ class Product
         return $this;
     }
 
+    /**
+     * @param string|null $variantId
+     * @return Product
+     */
     public function setVariantId(?string $variantId): self
     {
         $this->variantId = $variantId;
@@ -70,6 +82,10 @@ class Product
         return $this;
     }
 
+    /**
+     * @param int $price
+     * @return Product
+     */
     public function setPrice(
         int $price
     ): self {
@@ -79,6 +95,10 @@ class Product
     }
 
 
+    /**
+     * @param int $regularPrice
+     * @return Product
+     */
     public function setRegularPrice(int $regularPrice): self
     {
         $this->regularPrice = $regularPrice;
@@ -86,6 +106,10 @@ class Product
         return $this;
     }
 
+    /**
+     * @param int $totalPrice
+     * @return Product
+     */
     public function setTotalPrice(int $totalPrice): self
     {
         $this->totalPrice = $totalPrice;
@@ -93,6 +117,10 @@ class Product
         return $this;
     }
 
+    /**
+     * @param string $name
+     * @return Product
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -101,6 +129,10 @@ class Product
     }
 
 
+    /**
+     * @param int $quantity
+     * @return Product
+     */
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
@@ -108,6 +140,10 @@ class Product
         return $this;
     }
 
+    /**
+     * @param \PayEye\Lib\Model\ProductImages $images
+     * @return Product
+     */
     public function setImages(ProductImages $images): self
     {
         $this->images = $images;
@@ -116,12 +152,85 @@ class Product
     }
 
     /**
-     * @param ProductAttribute[] $attributes
+     * @param array $attributes
+     * @return $this
      */
     public function setAttributes(array $attributes): self
     {
         $this->attributes = $attributes;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getVariantId(): ?string
+    {
+        return $this->variantId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrice(): int
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRegularPrice(): int
+    {
+        return $this->regularPrice;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalPrice(): int
+    {
+        return $this->totalPrice;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @return \PayEye\Lib\Model\ProductImages
+     */
+    public function getImages(): ProductImages
+    {
+        return $this->images;
+    }
+
+    /**
+     * @return \PayEye\Lib\Model\ProductAttribute[]
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 }

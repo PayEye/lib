@@ -19,6 +19,10 @@ class ProductAttribute
     /** @var string */
     public $value;
 
+    /**
+     * @param array $context
+     * @return ProductAttribute
+     */
     public static function createFromArray(array $context): self
     {
         return self::builder()
@@ -27,6 +31,10 @@ class ProductAttribute
             ->setValue($context['value']);
     }
 
+    /**
+     * @param string $name
+     * @return ProductAttribute
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -34,6 +42,10 @@ class ProductAttribute
         return $this;
     }
 
+    /**
+     * @param string $value
+     * @return ProductAttribute
+     */
     public function setValue(string $value): self
     {
         $this->value = $value;
@@ -41,10 +53,38 @@ class ProductAttribute
         return $this;
     }
 
+    /**
+     * @param string|null $id
+     * @return ProductAttribute
+     */
     public function setId(?string $id): self
     {
         $this->id = $id;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValue(): string
+    {
+        return $this->value;
     }
 }

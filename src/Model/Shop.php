@@ -16,6 +16,10 @@ class Shop
     /** @var string */
     public $url;
 
+    /**
+     * @param array $context
+     * @return Shop
+     */
     public static function createFromArray(array $context): self
     {
         return self::builder()
@@ -23,15 +27,41 @@ class Shop
             ->setUrl($context['url']);
     }
 
+    /**
+     * @param string $name
+     * @return Shop
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
+    /**
+     * @param string $url
+     * @return Shop
+     */
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }

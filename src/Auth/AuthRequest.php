@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PayEye\Lib\Auth;
 
-class AuthRequest
+use PayEye\Lib\Interfaces\SignedContent;
+
+class AuthRequest implements SignedContent
 {
     /** @var array */
     private $signatureFrom;
@@ -12,20 +14,36 @@ class AuthRequest
     /** @var string */
     private $signature;
 
-    public function __construct(array $signatureFrom, string $signature)
+    /**
+     * @param array $signatureFrom
+     * @param string $signature
+     * @return AuthRequest
+     */
+    public static function create(array $signatureFrom, string $signature): self
     {
-        $this->signatureFrom = $signatureFrom;
-        $this->signature = $signature;
+        $object = new self();
+        $object->signatureFrom = $signatureFrom;
+        $object->signature = $signature;
+
+        return $object;
     }
 
+    /**
+     * @param array $context
+     * @return AuthRequest
+     */
     public static function createFromArray(array $context): self
     {
-        return new self(
-            $context['signatureFrom'] ?? [],
-            $context['signature'] ?? ''
-        );
+        $object = new self();
+        $object->signatureFrom = $context['signatureFrom'] ?? [];
+        $object->signature = $context['signature'] ?? '';
+
+        return $object;
     }
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [
@@ -34,13 +52,41 @@ class AuthRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getSignatureFrom(): array
     {
         return $this->signatureFrom;
     }
 
+    /**
+     * @return string
+     */
     public function getSignature(): string
     {
         return $this->signature;
+    }
+
+    /**
+     * @param array $signatureFrom
+     * @return AuthRequest
+     */
+    public function setSignatureFrom(array $signatureFrom): self
+    {
+        $this->signatureFrom = $signatureFrom;
+
+        return $this;
+    }
+
+    /**
+     * @param string $signature
+     * @return AuthRequest
+     */
+    public function setSignature(string $signature): self
+    {
+        $this->signature = $signature;
+
+        return $this;
     }
 }
