@@ -73,6 +73,9 @@ class OrderCreateRequestModel implements SignedContent
         return $this->cartId;
     }
 
+    /**
+     * @return string|null
+     */
     public function getShippingId(): ?string
     {
         return $this->shippingId;
@@ -118,6 +121,9 @@ class OrderCreateRequestModel implements SignedContent
         return $this->cartHash;
     }
 
+    /**
+     * @return string|null
+     */
     public function getShippingProvider(): ?string
     {
         return $this->shippingProvider;

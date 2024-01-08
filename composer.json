@@ -1,6 +1,5 @@
 {
   "name": "payeye/lib",
-  "version": "1.19.0",
   "type": "library",
   "autoload": {
     "psr-4": {

@@ -49,6 +49,10 @@ class OrderUpdateStatusRequestModel implements SignedContent
         return $this;
     }
 
+    /**
+     * @param string $paymentId
+     * @return $this
+     */
     public function setPaymentId(string $paymentId): self
     {
         $this->paymentId = $paymentId;
@@ -56,6 +60,10 @@ class OrderUpdateStatusRequestModel implements SignedContent
         return $this;
     }
 
+    /**
+     * @param string $status
+     * @return $this
+     */
     public function setStatus(string $status): self
     {
         $this->status = $status;

@@ -172,6 +172,10 @@ class CartResponseModel implements SignedContent
         return $this;
     }
 
+    /**
+     * @param string $cartType
+     * @return $this
+     */
     public function setCartType(string $cartType): self
     {
         $this->cartType = $cartType;
