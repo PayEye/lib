@@ -47,7 +47,7 @@ class PayEyeHttpClient
     /**
      * @throws HttpException
      */
-    private function post(string $pathUrl, array $data, AuthService $authService): HttpResponse
+    public function post(string $pathUrl, array $data, AuthService $authService): HttpResponse
     {
         $auth = [
             'signature' => $authService->getSignature(),
@@ -57,5 +57,20 @@ class PayEyeHttpClient
         $payload = array_merge($data, $auth);
 
         return HttpClient::post($this->baseUrl.$pathUrl, $payload);
+    }
+
+     /**
+     * @throws HttpException
+     */
+    public function put(string $pathUrl, array $data, AuthService $authService): HttpResponse
+    {
+        $auth = [
+            'signature' => $authService->getSignature(),
+            'signatureFrom' => $authService->getSignatureFrom(),
+        ];
+
+        $payload = array_merge($data, $auth);
+
+        return HttpClient::put($this->baseUrl.$pathUrl, $payload);
     }
 }

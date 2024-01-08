@@ -23,6 +23,14 @@ class HttpClient
     /**
      * @throws HttpException
      */
+    public static function put(string $url, $data): HttpResponse
+    {
+        return self::request('PUT', $url, $data);
+    }
+
+    /**
+     * @throws HttpException
+     */
     public static function get(string $url): HttpResponse
     {
         return self::request('GET', $url);
@@ -67,8 +75,10 @@ class HttpClient
 
         $response = new HttpResponse($httpCode, trim($response));
 
-        if ($response->getCode() !== HttpStatus::OK) {
-            throw new HttpException($response->getResponse(), $response->getCode());
+        if($requestType !== 'PUT'){
+            if ($response->getCode() !== HttpStatus::OK) {
+                throw new HttpException($response->getResponse(), $response->getCode());
+            }
         }
 
         return $response;

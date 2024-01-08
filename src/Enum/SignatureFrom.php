@@ -15,4 +15,5 @@ abstract class SignatureFrom
     public const RETURN_CREATE_RESPONSE = ['returnId', 'status'];
     public const RETURN_STATUS_REQUEST = ['shopIdentifier', 'returnId', 'status', 'amount'];
     public const UPDATE_STATUS_RETURN_RESPONSE = ['status'];
+    public const PLUGIN_STATUS_REQUEST = ['shopIdentifier','apiVersion','platformVersion','languageVersion','pluginVersion','pluginEvent','pluginMode','pluginConfig'];
 }
