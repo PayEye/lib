@@ -174,7 +174,7 @@ class CartResponseModel implements SignedContent
 
     /**
      * @param string $cartType
-     * @return $this
+     * @return CartResponseModel
      */
     public function setCartType(string $cartType): self
     {
@@ -227,6 +227,14 @@ class CartResponseModel implements SignedContent
     public function getShippingId(): ?string
     {
         return $this->shippingId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCartType(): string
+    {
+        return $this->cartType;
     }
 
     /**
