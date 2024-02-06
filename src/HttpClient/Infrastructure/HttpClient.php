@@ -28,6 +28,14 @@ class HttpClient
      * @return \PayEye\Lib\HttpClient\Model\HttpResponse
      * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
+    public static function put(string $url, $data): HttpResponse
+    {
+        return self::request('PUT', $url, $data);
+    }
+
+    /**
+     * @throws HttpException
+     */
     public static function get(string $url): HttpResponse
     {
         return self::request('GET', $url);
@@ -41,7 +49,7 @@ class HttpClient
      * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      * @throws \PayEye\Lib\HttpClient\Exception\HttpNetworkException
      */
-    public static function request(string $requestType, string $url, $data = null): HttpResponse
+    public static function request(string $requestType, string $url, $data = null, int $version = 1): HttpResponse
     {
         $curl = curl_init($url);
 
@@ -55,7 +63,7 @@ class HttpClient
             CURLOPT_CONNECTTIMEOUT => 5,
             CURLOPT_TIMEOUT => 60,
             CURLOPT_HTTPHEADER => [
-                'X-API-VERSION: 1',
+                "X-API-VERSION: $version",
                 'Content-Type:application/json',
             ],
         ];
@@ -77,8 +85,10 @@ class HttpClient
 
         $response = HttpResponse::create($httpCode, trim($response));
 
-        if ($response->getCode() !== HttpStatus::OK) {
-            throw new HttpException($response->getResponse(), $response->getCode());
+        if($requestType !== 'PUT'){
+            if ($response->getCode() !== HttpStatus::OK) {
+                throw new HttpException($response->getResponse(), $response->getCode());
+            }
         }
 
         return $response;

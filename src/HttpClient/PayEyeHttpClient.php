@@ -6,8 +6,11 @@ namespace PayEye\Lib\HttpClient;
 
 use PayEye\Lib\Env\Config;
 use PayEye\Lib\Auth\AuthService;
+use PayEye\Lib\HttpClient\Exception\HttpException;
 use PayEye\Lib\HttpClient\Infrastructure\HttpClient;
 use PayEye\Lib\HttpClient\Model\HttpResponse;
+use PayEye\Lib\HttpClient\Model\PluginStatusRequest;
+use PayEye\Lib\HttpClient\Model\PluginStatusResponse;
 use PayEye\Lib\HttpClient\Model\RefreshCartRequest;
 use PayEye\Lib\HttpClient\Model\RefreshCartResponse;
 use PayEye\Lib\HttpClient\Model\ReturnStatusRequest;
@@ -63,7 +66,7 @@ class PayEyeHttpClient
      * @return \PayEye\Lib\HttpClient\Model\HttpResponse
      * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
-    private function post(string $pathUrl, array $data, AuthService $authService): HttpResponse
+    public function post(string $pathUrl, array $data, AuthService $authService): HttpResponse
     {
         $auth = [
             'signature' => $authService->getSignature(),
@@ -92,5 +95,25 @@ class PayEyeHttpClient
         $this->baseUrl = $baseUrl;
 
         return $this;
+    }
+
+     /**
+     * @throws HttpException
+     */
+    public function put(string $pathUrl, array $data, AuthService $authService): HttpResponse
+    {
+        $auth = [
+            'signature' => $authService->getSignature(),
+            'signatureFrom' => $authService->getSignatureFrom(),
+        ];
+
+        $payload = array_merge($data, $auth);
+
+        return HttpClient::put($this->baseUrl.$pathUrl, $payload);
+    }
+    public function sendPluginStatus(PluginStatusRequest $data, AuthService $authService): PluginStatusResponse
+    {
+        $this->put('/plugin/status', $data->toArray(), $authService);
+        return PluginStatusResponse::createFromArray([]);
     }
 }
