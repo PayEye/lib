@@ -2,8 +2,13 @@
 
 namespace PayEye\Lib\Plugin;
 
-class PluginStatusResponseModel
+use PayEye\Lib\Tool\Builder;
+use PayEye\Lib\Interfaces\SignedContent;
+
+class PluginStatusResponseModel implements SignedContent
 {
+    use Builder;
+
     /** @var int */
     public $apiVersion;
 
@@ -28,29 +33,29 @@ class PluginStatusResponseModel
     /** @var array */
     public $pluginConfig;
 
-    public static function create(
-        int $apiVersion
-        , string $shopIdentifier
-        , string $pluginMode
-        , string $languageVersion
-        , string $platformVersion
-        , string $pluginVersion
-        , string $pluginEvent
-        , array $pluginConfig
-    ): self
+    /** @var array */
+    public $signatureFrom;
+
+    /** @var string */
+    public $signature;
+
+    /**
+     * @param array $context
+     * @return PluginStatusResponseModel
+     */
+    public static function createFromArray(array $context)
     {
-        $object = new self();
-
-        $object->apiVersion = $apiVersion;
-        $object->shopIdentifier = $shopIdentifier;
-        $object->pluginMode = $pluginMode;
-        $object->languageVersion = $languageVersion;
-        $object->platformVersion = $platformVersion;
-        $object->pluginVersion = $pluginVersion;
-        $object->pluginEvent = $pluginEvent;
-        $object->pluginConfig = $pluginConfig;
-
-        return $object;
+        return self::builder()
+            ->setApiVersion($context['apiVersion'])
+            ->setShopIdentifier($context['shopIdentifier'])
+            ->setPluginMode($context['pluginMode'])
+            ->setLanguageVersion($context['languageVersion'])
+            ->setPlatformVersion($context['platformVersion'])
+            ->setPluginVersion($context['pluginVersion'])
+            ->setPluginEvent($context['pluginEvent'])
+            ->setPluginConfig($context['pluginConfig'])
+            ->setSignatureFrom($context['signatureFrom'])
+            ->setSignature($context['signature'] ?? '');
     }
 
     /**
@@ -201,6 +206,44 @@ class PluginStatusResponseModel
     public function setPluginConfig(array $pluginConfig): self
     {
         $this->pluginConfig = $pluginConfig;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSignatureFrom(): array
+    {
+        return $this->signatureFrom;
+    }
+
+    /**
+     * @param array $signatureFrom
+     * @return PluginStatusResponseModel
+     */
+    public function setSignatureFrom(array $signatureFrom): self
+    {
+        $this->signatureFrom = $signatureFrom;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSignature(): string
+    {
+        return $this->signature;
+    }
+
+    /**
+     * @param string $signature
+     * @return PluginStatusResponseModel
+     */
+    public function setSignature(string $signature): self
+    {
+        $this->signature = $signature;
 
         return $this;
     }
