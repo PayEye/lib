@@ -15,22 +15,24 @@ class HttpClient
     /**
      * @param string $url
      * @param $data
+     * @param $apiVersion
      * @return \PayEye\Lib\HttpClient\Model\HttpResponse
      * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
-    public static function post(string $url, $data): HttpResponse
+    public static function post(string $url, $data, $apiVersion): HttpResponse
     {
-        return self::request('POST', $url, $data);
+        return self::request('POST', $url, $data, $apiVersion);
     }
 
     /**
      * @param string $url
+     * @param int $apiVersion
      * @return \PayEye\Lib\HttpClient\Model\HttpResponse
      * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      */
-    public static function put(string $url, $data): HttpResponse
+    public static function put(string $url, $data, int $apiVersion): HttpResponse
     {
-        return self::request('PUT', $url, $data);
+        return self::request('PUT', $url, $data, $apiVersion);
     }
 
     /**
@@ -49,7 +51,7 @@ class HttpClient
      * @throws \PayEye\Lib\HttpClient\Exception\HttpException
      * @throws \PayEye\Lib\HttpClient\Exception\HttpNetworkException
      */
-    public static function request(string $requestType, string $url, $data = null, int $version = 1): HttpResponse
+    public static function request(string $requestType, string $url, $data = null, int $apiVersion = 1): HttpResponse
     {
         $curl = curl_init($url);
 
@@ -63,7 +65,7 @@ class HttpClient
             CURLOPT_CONNECTTIMEOUT => 5,
             CURLOPT_TIMEOUT => 60,
             CURLOPT_HTTPHEADER => [
-                "X-API-VERSION: $version",
+                "X-API-VERSION: $apiVersion",
                 'Content-Type:application/json',
             ],
         ];

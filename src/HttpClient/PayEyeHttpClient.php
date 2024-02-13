@@ -21,14 +21,19 @@ class PayEyeHttpClient
     /** @var string */
     private $baseUrl;
 
+    /** @var int */
+    private $apiVersion;
+
     /**
      * @param \PayEye\Lib\Env\Config $config
      * @return PayEyeHttpClient
      */
-    public static function create(Config $config): self
+    public static function create(Config $config, $apiVersion): self
     {
         $object = new self();
+
         $object->baseUrl = $config->getUrl();
+        $object->apiVersion = $apiVersion;
 
         return $object;
     }
@@ -75,7 +80,7 @@ class PayEyeHttpClient
 
         $payload = array_merge($data, $auth);
 
-        return HttpClient::post($this->baseUrl.$pathUrl, $payload);
+        return HttpClient::post($this->baseUrl.$pathUrl, $payload, $this->apiVersion);
     }
 
     /**
@@ -109,8 +114,12 @@ class PayEyeHttpClient
 
         $payload = array_merge($data, $auth);
 
-        return HttpClient::put($this->baseUrl.$pathUrl, $payload);
+        return HttpClient::put($this->baseUrl.$pathUrl, $payload, $this->apiVersion);
     }
+
+    /**
+     * @throws HttpException
+     */
     public function sendPluginStatus(PluginStatusRequest $data, AuthService $authService): PluginStatusResponse
     {
         $this->put('/plugin/status', $data->toArray(), $authService);
