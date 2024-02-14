@@ -30,7 +30,7 @@ class PluginStatusResponseModel implements SignedContent
     /** @var string */
     public $pluginEvent;
 
-    /** @var array */
+    /** @var ?array */
     public $pluginConfig;
 
     /** @var array */
@@ -192,18 +192,18 @@ class PluginStatusResponseModel implements SignedContent
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getPluginConfig(): array
+    public function getPluginConfig(): ?array
     {
         return $this->pluginConfig;
     }
 
     /**
-     * @param array $pluginConfig
+     * @param array|null $pluginConfig
      * @return PluginStatusResponseModel
      */
-    public function setPluginConfig(array $pluginConfig): self
+    public function setPluginConfig(?array $pluginConfig): self
     {
         $this->pluginConfig = $pluginConfig;
 
