@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PayEye\Lib\Order;
 
 use PayEye\Lib\Interfaces\SignedContent;
-use PayEye\Lib\Model\Invoice;
+use PayEye\Lib\Model\InvoiceDetails;
 use PayEye\Lib\Model\Billing;
 use PayEye\Lib\Model\Shipping;
 use PayEye\Lib\Tool\Builder;
@@ -55,7 +55,7 @@ class OrderCreateRequestModel implements SignedContent
         $object->shippingProvider = $request['shippingProvider'];
 
         if ($object->hasInvoice) {
-            $object->invoice = Invoice::createFromArray($request['invoice']);
+            $object->invoiceDetails = InvoiceDetails::createFromArray($request['invoiceDetails']);
         }
 
         $object->signature = $request['signature'];
@@ -105,11 +105,11 @@ class OrderCreateRequestModel implements SignedContent
     }
 
     /**
-     * @return \PayEye\Lib\Model\Invoice|null
+     * @return \PayEye\Lib\Model\InvoiceDetails|null
      */
-    public function getInvoice(): ?Invoice
+    public function getInvoiceDetails(): ?InvoiceDetails
     {
-        return $this->invoice;
+        return $this->invoiceDetails;
     }
 
     /**
@@ -184,12 +184,12 @@ class OrderCreateRequestModel implements SignedContent
     }
 
     /**
-     * @param \PayEye\Lib\Model\Invoice|null $invoice
+     * @param \PayEye\Lib\Model\InvoiceDetails|null $invoiceDetails
      * @return OrderCreateRequestModel
      */
-    public function setInvoice(?Invoice $invoice): self
+    public function setInvoiceDetails(?InvoiceDetails $invoiceDetails): self
     {
-        $this->invoice = $invoice;
+        $this->invoiceDetails = $invoiceDetails;
 
         return $this;
     }

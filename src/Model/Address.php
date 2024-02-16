@@ -63,29 +63,9 @@ class Address
     }
 
     /**
-     * @deprecated
-     * @fixme
-     * @return string|null
-     */
-    public function getBuildingNo(): ?string
-    {
-        return $this->buildingNumber;
-    }
-
-    /**
      * @return string|null
      */
     public function getFlatNumber(): ?string
-    {
-        return $this->flatNumber;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @return string|null
-     */
-    public function getFlatNo(): ?string
     {
         return $this->flatNumber;
     }
@@ -96,26 +76,6 @@ class Address
     public function getPostCode(): string
     {
         return $this->postCode;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @return string
-     */
-    public function getPostalCode(): string
-    {
-        return $this->postCode;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @return string
-     */
-    public function getCountryCode(): string
-    {
-        return $this->country;
     }
 
     /**
@@ -157,36 +117,10 @@ class Address
     }
 
     /**
-     * @deprecated
-     * @fixme
-     * @param string|null $buildingNumber
-     * @return Address
-     */
-    public function setBuildingNo(?string $buildingNumber): self
-    {
-        $this->buildingNumber = $buildingNumber;
-
-        return $this;
-    }
-
-    /**
      * @param string|null $flatNumber
      * @return Address
      */
     public function setFlatNumber(?string $flatNumber): self
-    {
-        $this->flatNumber = $flatNumber;
-
-        return $this;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @param string|null $flatNumber
-     * @return Address
-     */
-    public function setFlatNo(?string $flatNumber): self
     {
         $this->flatNumber = $flatNumber;
 
@@ -200,32 +134,6 @@ class Address
     public function setPostCode(string $postCode): self
     {
         $this->postCode = $postCode;
-
-        return $this;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @param string $postCode
-     * @return Address
-     */
-    public function setPostalCode(string $postCode): self
-    {
-        $this->postCode = $postCode;
-
-        return $this;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @param string $countryCode
-     * @return Address
-     */
-    public function setCountryCode(string $countryCode): self
-    {
-        $this->country = $countryCode;
 
         return $this;
     }
