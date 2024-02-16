@@ -55,7 +55,7 @@ class PluginStatusResponseModel implements SignedContent
             ->setPluginEvent($context['pluginEvent'])
             ->setPluginConfig($context['pluginConfig'])
             ->setSignatureFrom($context['signatureFrom'])
-            ->setSignature($context['signature'] ?? '');
+            ->setSignature($context['signature']);
     }
 
     /**
