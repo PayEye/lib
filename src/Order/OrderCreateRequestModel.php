@@ -54,9 +54,8 @@ class OrderCreateRequestModel implements SignedContent
         $object->cartHash = $request['cartHash'];
         $object->shippingProvider = $request['shippingProvider'];
 
-        $invoice = $request['hasInvoice'];
         if ($object->hasInvoice) {
-            $object->invoice = Invoice::createFromArray($invoice);
+            $object->invoice = Invoice::createFromArray($request['invoice']);
         }
 
         $object->signature = $request['signature'];
@@ -100,7 +99,7 @@ class OrderCreateRequestModel implements SignedContent
     /**
      * @return bool
      */
-    public function isHasInvoice(): bool
+    public function hasInvoice(): bool
     {
         return $this->hasInvoice;
     }

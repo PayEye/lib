@@ -52,6 +52,9 @@ class CartResponseModel implements SignedContent
     /** @var string */
     public $signature;
 
+    /** @var null|string[] */
+    public $supportedFeatures;
+
     /**
      * @param array $context
      * @return CartResponseModel
@@ -81,7 +84,8 @@ class CartResponseModel implements SignedContent
             ->setCartHash($context['cartHash'])
             ->setCartType($context['cartType'])
             ->setSignatureFrom($context['signatureFrom'])
-            ->setSignature($context['signature'] ?? '');
+            ->setSignature($context['signature'] ?? '')
+            ->setSupportedFeatures($context['supportedFeatures'] ?? null);
     }
 
     /**
@@ -206,6 +210,17 @@ class CartResponseModel implements SignedContent
     }
 
     /**
+     * @param array|null $supportedFeatures
+     * @return CartResponseModel
+     */
+    public function setSupportedFeatures(?array $supportedFeatures): self
+    {
+        $this->supportedFeatures = $supportedFeatures;
+
+        return $this;
+    }
+
+    /**
      * @return \PayEye\Lib\Model\Shop
      */
     public function getShop(): Shop
@@ -283,6 +298,14 @@ class CartResponseModel implements SignedContent
     public function getSignatureFrom(): array
     {
         return $this->signatureFrom;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getSupportedFeatures(): ?array
+    {
+        return $this->supportedFeatures;
     }
 
     /**

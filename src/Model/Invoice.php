@@ -11,7 +11,7 @@ class Invoice
     use Builder;
 
     /** @var string */
-    private $nip;
+    private $vatId;
 
     /** @var string */
     private $company;
@@ -27,25 +27,53 @@ class Invoice
     {
         $object = self::builder();
 
-        $object->nip = $context['nip'];
+        $object->vatId = $context['vatId'];
         $object->company = $context['company'];
-        $object->address = Address::createFromArray($context);
+        $object->address = Address::createFromArray($context['address']);
 
         return $object;
     }
 
     /**
+     * @deprecated
+     * @fixme
      * @return string
      */
-    public function getNip(): string
+    public function getId(): string
     {
-        return $this->nip;
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getVatId(): string
+    {
+        return $this->vatId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTaxId(): string
+    {
+        return $this->vatId;
     }
 
     /**
      * @return string
      */
     public function getCompany(): string
+    {
+        return $this->company;
+    }
+
+    /**
+     * @deprecated
+     * @fixme
+     * @return string
+     */
+    public function getCompanyName(): string
     {
         return $this->company;
     }
@@ -59,12 +87,46 @@ class Invoice
     }
 
     /**
-     * @param string $nip
+     * @deprecated
+     * @fixme
+     * @return bool
+     */
+    public function getDefaultInvoiceDetails(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @deprecated
+     * @fixme
+     * @param string $vatId
      * @return Invoice
      */
-    public function setNip(string $nip): self
+    public function setId(string $id): self
     {
-        $this->nip = $nip;
+        return $this;
+    }
+
+    /**
+     * @param string $vatId
+     * @return Invoice
+     */
+    public function setVatId(string $vatId): self
+    {
+        $this->vatId = $vatId;
+
+        return $this;
+    }
+
+    /**
+     * @deprecated
+     * @fixme
+     * @param string $vatId
+     * @return Invoice
+     */
+    public function setTaxId(string $vatId): self
+    {
+        $this->vatId = $vatId;
 
         return $this;
     }
@@ -81,6 +143,19 @@ class Invoice
     }
 
     /**
+     * @deprecated
+     * @fixme
+     * @param string $company
+     * @return Invoice
+     */
+    public function setCompanyName(string $company): self
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
      * @param \PayEye\Lib\Model\Address $address
      * @return Invoice
      */
@@ -88,6 +163,17 @@ class Invoice
     {
         $this->address = $address;
 
+        return $this;
+    }
+
+    /**
+     * @deprecated
+     * @fixme
+     * @param bool $defaultInvoiceDetails
+     * @return Invoice
+     */
+    public function setDefaultInvoiceDetails(bool $defaultInvoiceDetails): self
+    {
         return $this;
     }
 }
