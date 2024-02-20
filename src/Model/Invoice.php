@@ -11,10 +11,10 @@ class Invoice
     use Builder;
 
     /** @var string */
-    private $vatId;
+    private $taxId;
 
     /** @var string */
-    private $company;
+    private $companyName;
 
     /** @var Address */
     private $address;
@@ -27,29 +27,11 @@ class Invoice
     {
         $object = self::builder();
 
-        $object->vatId = $context['vatId'];
-        $object->company = $context['company'];
+        $object->taxId = $context['taxId'];
+        $object->companyName = $context['companyName'];
         $object->address = Address::createFromArray($context['address']);
 
         return $object;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @return string
-     */
-    public function getId(): string
-    {
-        return '';
-    }
-
-    /**
-     * @return string
-     */
-    public function getVatId(): string
-    {
-        return $this->vatId;
     }
 
     /**
@@ -57,25 +39,15 @@ class Invoice
      */
     public function getTaxId(): string
     {
-        return $this->vatId;
+        return $this->taxId;
     }
 
     /**
-     * @return string
-     */
-    public function getCompany(): string
-    {
-        return $this->company;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
      * @return string
      */
     public function getCompanyName(): string
     {
-        return $this->company;
+        return $this->companyName;
     }
 
     /**
@@ -87,70 +59,23 @@ class Invoice
     }
 
     /**
-     * @deprecated
-     * @fixme
-     * @return bool
-     */
-    public function getDefaultInvoiceDetails(): bool
-    {
-        return false;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @param string $vatId
+     * @param string $taxId
      * @return Invoice
      */
-    public function setId(string $id): self
+    public function setTaxId(string $taxId): self
     {
-        return $this;
-    }
-
-    /**
-     * @param string $vatId
-     * @return Invoice
-     */
-    public function setVatId(string $vatId): self
-    {
-        $this->vatId = $vatId;
+        $this->taxId = $taxId;
 
         return $this;
     }
 
     /**
-     * @deprecated
-     * @fixme
-     * @param string $vatId
+     * @param string $companyName
      * @return Invoice
      */
-    public function setTaxId(string $vatId): self
+    public function setCompanyName(string $companyName): self
     {
-        $this->vatId = $vatId;
-
-        return $this;
-    }
-
-    /**
-     * @param string $company
-     * @return Invoice
-     */
-    public function setCompany(string $company): self
-    {
-        $this->company = $company;
-
-        return $this;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @param string $company
-     * @return Invoice
-     */
-    public function setCompanyName(string $company): self
-    {
-        $this->company = $company;
+        $this->companyName = $companyName;
 
         return $this;
     }
@@ -163,17 +88,6 @@ class Invoice
     {
         $this->address = $address;
 
-        return $this;
-    }
-
-    /**
-     * @deprecated
-     * @fixme
-     * @param bool $defaultInvoiceDetails
-     * @return Invoice
-     */
-    public function setDefaultInvoiceDetails(bool $defaultInvoiceDetails): self
-    {
         return $this;
     }
 }

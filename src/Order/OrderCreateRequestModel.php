@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PayEye\Lib\Order;
 
 use PayEye\Lib\Interfaces\SignedContent;
-use PayEye\Lib\Model\InvoiceDetails;
+use PayEye\Lib\Model\Invoice;
 use PayEye\Lib\Model\Billing;
 use PayEye\Lib\Model\Shipping;
 use PayEye\Lib\Tool\Builder;
@@ -32,11 +32,14 @@ class OrderCreateRequestModel implements SignedContent
     /** @var null|string */
     private $shippingProvider;
 
+    /** @var null|Invoice */
+    private $invoice;
+
     /** @var string */
     private $signature;
 
     /** @var string[] */
-    private $signatureFrom = ['cartId', 'shippingId', 'billing', 'shipping', 'cartHash', 'hasInvoice', 'shippingProvider'];
+    private $signatureFrom = ['cartId', 'shippingId', 'billing', 'shipping', 'cartHash', 'hasInvoice', 'shippingProvider', 'invoice'];
 
     /**
      * @param array $request
@@ -55,7 +58,7 @@ class OrderCreateRequestModel implements SignedContent
         $object->shippingProvider = $request['shippingProvider'];
 
         if ($object->hasInvoice) {
-            $object->invoiceDetails = InvoiceDetails::createFromArray($request['invoiceDetails']);
+            $object->invoice = Invoice::createFromArray($request['invoice']);
         }
 
         $object->signature = $request['signature'];
@@ -105,11 +108,11 @@ class OrderCreateRequestModel implements SignedContent
     }
 
     /**
-     * @return \PayEye\Lib\Model\InvoiceDetails|null
+     * @return \PayEye\Lib\Model\Invoice|null
      */
-    public function getInvoiceDetails(): ?InvoiceDetails
+    public function getInvoice(): ?Invoice
     {
-        return $this->invoiceDetails;
+        return $this->invoice;
     }
 
     /**
@@ -184,12 +187,12 @@ class OrderCreateRequestModel implements SignedContent
     }
 
     /**
-     * @param \PayEye\Lib\Model\InvoiceDetails|null $invoiceDetails
+     * @param \PayEye\Lib\Model\Invoice|null $invoice
      * @return OrderCreateRequestModel
      */
-    public function setInvoiceDetails(?InvoiceDetails $invoiceDetails): self
+    public function setInvoice(?Invoice $invoice): self
     {
-        $this->invoiceDetails = $invoiceDetails;
+        $this->invoice = $invoice;
 
         return $this;
     }
